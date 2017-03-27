@@ -85,21 +85,27 @@ body {
  */
 
  /* Table current Medication */
-.table-current-medication, tbody, td, th {
+.table-current-medication td, .table-current-medication th {
   border: 1px solid black !important;
-  border-collapse: collapse;
+  border-spacing: 0 !important;
 }
 
-.table-current-medication, thead {
-  background: #D3D3D3;
+.table-current-medication thead {
+  background-color: #D3D3D3 !important;
 }
 
-.table-current-medication, tbody, td {
-  background: #fff;
+.table-current-medication tbody {
+  background-color: #fff;
 }
+
+.table {
+  border-spacing: 0 !important;
+}
+
 
 /*
  * Placeholder dashboard ideas
+ * Can be deleted when placeholders are not in use anymore.
  */
 
 .placeholders {
