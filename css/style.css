@@ -1,4 +1,6 @@
-/* Move down content because we have a fixed navbar that is 50px tall */
+/* Custom stylesheet for changes in appearance. Do not use bootstrap CSS files for changes in the design. */
+
+/* Move down content because we have a fixed navbar that is 70px tall */
 body {
   padding-top: 70px;
 }
@@ -61,6 +63,10 @@ body {
     background-color: #428bca;
 }
 
+.patient-info{
+  list-style: none;
+  padding-left: 0;
+}
 
 /*
  * Main content
@@ -74,6 +80,23 @@ body {
     margin-top: 0;
 }
 
+/*
+ * Content Current Medication
+ */
+
+ /* Table current Medication */
+.table-current-medication, tbody, td, th {
+  border: 1px solid black !important;
+  border-collapse: collapse;
+}
+
+.table-current-medication, thead {
+  background: #D3D3D3;
+}
+
+.table-current-medication, tbody, td {
+  background: #fff;
+}
 
 /*
  * Placeholder dashboard ideas
