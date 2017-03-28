@@ -91,7 +91,7 @@ body {
 }
 
 .table-current-medication thead {
-  background-color: #D3D3D3 !important;
+  background-color: #eee !important;
 }
 
 .table-current-medication tbody {
@@ -100,6 +100,18 @@ body {
 
 .table {
   border-spacing: 0 !important;
+}
+
+/* Button Bar */
+
+.adjustButtons button {
+  background-color: #428bca;
+  color: #FFF;
+  border: none;
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  margin: 15px 25px 0 0;
 }
 
 
