@@ -123,6 +123,38 @@ body {
   margin: 15px 25px 0 0;
 }
 
+/* Form adjustmedication */
+.table-adjust-medication thead {
+  background-color: #eee !important;
+}
+
+.table-adjust-medication td, .table-adjust-medication th {
+  border: 1px solid black !important;
+  border-spacing: 0 !important;
+}
+
+.table-adjust-medication td {
+  margin: 0;
+  padding: 0;
+}
+
+.table-adjust-medication input {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+  border-radius: 0;
+  line-height: 1;
+}
+
+textarea {
+  border: 1px solid #c5c5c5;
+  border-radius: 3px;
+  background-color: #f3f3f3;
+  padding-left: 5px;
+}
+
 
 /*
  * Placeholder dashboard ideas

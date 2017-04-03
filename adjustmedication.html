@@ -105,32 +105,41 @@
 
                 <h2 class="sub-header">Platzhalter Datum Medikationsplan</h2>
 
-                <!-- Form to change current prescriptions -->
-                <div class="changeForm">
-                    <form action="">
-                        Medikament:<br>
-                        <input type="text" name="medicine" value="">
-                        <br>Einnahmeschema<br>
-                        <input type="text" name="schema" value="">
-                        <br>Einheit<br>
-                        <input type="text" name="unit" value="">
-                        <br>Art der Medikation<br>
-                        <input type="text" name="applicationform" value="">
-                        <br>Einnehmen von:<br>
-                        <input type="text" name="fromdate" value="">
-                        <br>Einnahme bis und mit:<br>
-                        <input type="text" name="todate" value="">
-                        <br>Anleitung<br>
-                        <input type="text" name="instruction" value="">
-                        <br>Grund<br>
-                        <input type="text" name="reason" value="">
-                        <br>Kommentar<br>
-                        <input type="text" name="commentary" value="">
+                <div class="table-responsive">
+                  <table id="myTable" class="table table-adjust-medication">
+                    <thead>
+                      <tr>
+                        <th>Medikament</th>
+                        <th>Schema</th>
+                        <th>Einheit</th>
+                        <th>Art der Medikation</th>
+                        <th>Beginn Einnahme</th>
+                        <th>Ende Einnahme</th>
+                        <th>Anwendungsinstruktion</th>
+                        <th>Anwendungsgrund</th>
+                        <th>Kommentar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="text" name="medicine" value=""></td>
+                        <td><input type="text" name="schema" value=""></td>
+                        <td><input type="text" name="unit" value=""></td>
+                        <td><input type="text" name="applicationform" value=""></td>
+                        <td><input type="text" name="fromdate" value=""></td>
+                        <td><input type="text" name="todate" value=""></td>
+                        <td><input type="text" name="instruction" value=""></td>
+                        <td><input type="text" name="reason" value=""></td>
+                        <td><input type="text" name="commentary" value=""></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
+                <div class="adjustButtons">
+                  <button onclick="addRow()">Create row</button>
+                </div>
 
-                        <br><br>
-                        <input type="submit" value="Submit">
-                    </form>
 
                 </div>
             </div>
@@ -154,10 +163,6 @@
     <!-- Custom JavaScript files -->
     <script src="js/function.js"></script>
 
-    <!-- Christine's initial code snippet. Uncomment if needed
-    login
-    <a href="home/index.html">Login</a>
-  -->
 </body>
 
 </html>

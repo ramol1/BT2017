@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<html style="" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba no-hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths k-ff k-ff52">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Active Form (MAF)</title>
+    <link rel="icon" type="image/x-icon" href="https://webex.hcisolutions.ch/Webapplications/MafIntern/Content/Images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://webex.hcisolutions.ch/Webapplications/MafIntern/Content/Images/favicon.ico">
+
+    <link rel="stylesheet" href="pretrash/font-awesome.css">
+    <link href="pretrash/css.css" rel="stylesheet">
+
+    <link href="pretrash/css.txt" rel="stylesheet">
+
+    <link href="pretrash/css_002.css" rel="stylesheet">
+
+
+
+    <script src="pretrash/modernizr"></script>
+
+    <script src="pretrash/jquery"></script>
+
+
+    <script src="pretrash/jqueryui"></script>
+
+
+
+    <script src="pretrash/kendoCustom"></script>
+
+
+
+
+    <script src="pretrash/EditMedication.js"></script>
+
+    <script src="pretrash/scripts"></script>
+
+
+
+
+
+
+</head>
+
+<body>
+    <div class="mainContainer">
+        <script type="text/javascript">
+            function SubscriptionChanged() {
+                document.location.href = '/Webapplications/MafIntern/ApplicationTemplate/ChangeSubscription/' + $('#subscriptionSelect').val() + '?returnUrl=/Webapplications/MafIntern/Edit';
+            }
+
+            function FilterChanged() {
+                document.location.href = '/Webapplications/MafIntern/ApplicationTemplate/ChangeFilter/' + $('#filterSelect').val() + '?returnUrl=/Webapplications/MafIntern/Edit';
+            }
+        </script>
+
+        <div class="header">
+            <div class="companyLogo">
+                <a href="https://webex.hcisolutions.ch/Webapplications/MafIntern/">
+                </a>
+            </div>
+            <div class="links">
+
+                <div class="link">
+                    <a href="https://webex.hcisolutions.ch/Webapplications/MafIntern/ApplicationTemplate/LogOff">Log Off</a> </div>
+
+            </div>
+            <div class="logonInfo">
+                <span class="userName">Student BFH </span>
+
+            </div>
+        </div>
+        <div class="topBar">
+            <div class="topNav">
+
+
+            </div>
+            <div>
+
+            </div>
+            <table style="width:100%">
+                <tbody>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+                            <div class="topBarRight">
+                                <div id="SettingsControl">
+
+                                    <span>BFH Student</span>
+                                    <button type="button" onclick="location.href='/Webapplications/MafIntern/Settings';return false" value="Settings"><i class="fa fa-cog fa-lg"></i> Einstellungen</button>
+
+
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="clear:both;"></div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#DDSettingsSet").kendoDropDownList();
+
+                $("#DDSettingsSet").each(function(index) {
+                    $(this).closest(".k-widget").css("width", 300);
+                });
+
+                if (typeof PostWithoutValidation == 'function') {
+                    $("#SettingsControl").show();
+                } else {
+                    $("#SettingsControl").hide();
+                }
+
+
+
+
+            });
+
+
+            function changeSettingsSet(settingsSetGuid) {
+                $("#settingsGuid").val(settingsSetGuid);
+                PostWithoutValidation('ChangeSettings');
+            }
+        </script>
+
+        <img id="mainWaitImg" style="display:none" src="Medication%20Active%20Form%20%28MAF%29-Dateien/loading.gif">
+        <div class="content" id="mainDiv">
+
+
+
+
+            <form action="/Webapplications/MafIntern/Edit" id="mainForm" method="post">
+                <table style="width:100%">
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="nodesktop yesmobile">
+                                    <div class="k-widget k-upload k-header k-upload-empty">
+                                        <div class="k-dropzone">
+                                            <div class="k-button k-upload-button"><input name="files" id="filesMobile" class="fileUpload" accept=".jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.pdf,.chmed,.json,.txt" style="width:100%; height:50px; text-align:right" data-role="upload" multiple="multiple"
+                                                    autocomplete="off" type="file"><span>DataMatrix</span></div><em>drop files here to upload</em></div>
+                                    </div>
+                                </div>
+
+                                <table style="width:100%" class="nomobile">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:50px">
+                                                <button type="submit" value="Scan" class="command" onclick="OpenScanDialog();return false;"><i class="fa fa-camera" style="color:darkgrey;"></i> Scan</button>
+
+                                            </td>
+                                            <td>
+                                                <div class="k-widget k-upload k-header k-upload-empty">
+                                                    <div class="k-dropzone">
+                                                        <div class="k-button k-upload-button"><input name="files" id="files" class="fileUpload" accept=".jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.pdf,.chmed,.json,.txt" style="width:100%; height:50px; text-align:right" data-role="upload" multiple="multiple"
+                                                                autocomplete="off" type="file"><span>Datei hochladen</span></div><em>drop files here to upload</em></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+
+
+
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $(".fileUpload").kendoUpload({
+                                            async: {
+                                                saveUrl: "/Webapplications/MafIntern/Upload",
+                                                autoUpload: true
+                                            },
+                                            error: onFileUploadError,
+                                            success: onFileUploadSuccess
+                                        });
+
+
+
+                                        $("#filesMobile").closest(".k-upload").find("span").text("DataMatrix");
+                                        $("#files").closest(".k-upload").find("span").text("Datei hochladen");
+
+                                    });
+
+
+                                    ScanMafDialog = $("#ScanMafDialog").dialog({
+                                        autoOpen: false,
+                                        height: 350,
+                                        width: 400,
+                                        modal: true,
+                                        close: function() {
+
+                                        }
+                                    });
+
+                                    function onFileUploadSuccess(e) {
+                                        if (e.response.ErrorMessage.length == 0) {
+                                            $("#mainDiv").hide();
+                                            $("#mainWaitImg").show();
+                                            MedicationScanned(e.response.Barcode);
+                                        } else {
+                                            alert(e.response.ErrorMessage);
+                                        }
+                                        $(".k-upload-files.k-reset").find("li").remove();
+
+                                    }
+
+                                    function onFileUploadError(e) {
+                                        alert("Error (" + e.operation + ")");
+                                    }
+
+                                    function OpenScanDialog() {
+                                        $.ajax({
+                                            type: "GET",
+                                            url: '/Webapplications/MafIntern/Upload/GetScanMedicationView',
+                                            success: function(html) {
+                                                $("#ScanMafDialogContent").html(html);
+                                                ScanMafDialog.dialog('open');
+                                            },
+                                            error: function(xhr, status, error) {
+                                                alert(error);
+                                            }
+                                        });
+                                    }
+                                </script>
+
+
+
+                            </td>
+                            <td align="right">
+                                <span style="text-align: left; width: 220px;" title="" class="k-widget k-dropdown k-header" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="CurrentActiveFormType_listbox" aria-disabled="false" aria-readonly="false"
+                                    aria-busy="false" aria-activedescendant="ec998ccb-28c3-4296-813a-b3d2f9fd4617"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">MedicationPlan</span>
+                                <span
+                                    unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                    </span><select data-val="true" data-val-required="The CurrentType field is required." id="CurrentActiveFormType" name="CurrentType" onchange="MedicationTypeChanged($(this));" style="text-align: left; display: none;" data-role="dropdownlist"><option value="1" selected="selected">MedicationPlan</option><option value="2">E-Rezept</option><option value="3">Polymedikations-Check</option></select></span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div style="clear:both;"></div>
+                <input class="commandName" id="Command" name="Command" value="" type="hidden"><input data-val="true" data-val-required="The SettingsGuid field is required." id="settingsGuid" name="SettingsGuid" value="00000000-0000-0000-0000-000000000000"
+                    type="hidden"><input data-val="true" data-val-required="The PolymedicationCheckPrinted field is required." id="PolymedicationCheckPrinted" name="PolymedicationCheckPrinted" value="False" type="hidden">
+                <h2>eMediplan</h2>
+
+                <div id="Medication">
+                    <input data-val="true" data-val-required="The MedType field is required." id="MedicationModel_MedType" name="MedicationModel.MedType" value="MedicationPlan" type="hidden">
+                    <input id="MedicationModel_OrganisationZsr" name="MedicationModel.OrganisationZsr" value="" type="hidden">
+                    <input id="MedicationModel_Id" name="MedicationModel.Id" value="d619810c-15c4-4f52-830a-9111f836085f" type="hidden">
+                    <input data-val="true" data-val-required="The PatientTakeMoreThanThreeMedicamentPerDay field is required." id="MedicationModel_PatientTakeMoreThanThreeMedicamentPerDay" name="MedicationModel.PatientTakeMoreThanThreeMedicamentPerDay" value="False" type="hidden">
+                    <input data-val="true" data-val-required="The PatientIsAgreeForPmc field is required." id="MedicationModel_PatientIsAgreeForPmc" name="MedicationModel.PatientIsAgreeForPmc" value="False" type="hidden">
+                    <input id="MedicationModel_Advices" name="MedicationModel.Advices" value="" type="hidden">
+                    <input data-val="true" data-val-required="The UsageAdvice field is required." id="MedicationModel_UsageAdvice" name="MedicationModel.UsageAdvice" value="False" type="hidden">
+                    <input id="MedicationModel_UsageAdvices" name="MedicationModel.UsageAdvices" value="" type="hidden">
+                    <input data-val="true" data-val-date="The field StartDate must be a date." data-val-required="The StartDate field is required." id="MedicationModel_StartDate" name="MedicationModel.StartDate" value="01.04.2017 16:09:12" type="hidden">
+                    <input id="hiddenBarcodeToMerge" name="MedicationModel.BarCodeToMerge" value="" type="hidden">
+                    <input id="MedicationModel_Author" name="MedicationModel.Author" value="" type="hidden">
+                    <input id="MedicationModel_ValidateBy" name="MedicationModel.ValidateBy" value="" type="hidden">
+                    <input data-val="true" data-val-date="The field ValidationDate must be a date." id="MedicationModel_ValidationDate" name="MedicationModel.ValidationDate" value="" type="hidden">
+
+
+                    <div id="Patient">
+
+
+                        <h2 onclick="">
+    Patient
+</h2>
+                        <input data-val="true" data-val-required="The MedType field is required." id="MedicationModel_Patient_MedType" name="MedicationModel.Patient.MedType" value="MedicationPlan" type="hidden">
+                        <input id="MedicationModel_Patient_Id" name="MedicationModel.Patient.Id" value="" type="hidden">
+                        <input id="MedicationModel_Patient_EHealthId" name="MedicationModel.Patient.EHealthId" value="" type="hidden">
+                        <input class="patientLastUpdateDate" data-val="true" data-val-date="The field LastUpdateDate must be a date." data-val-required="The LastUpdateDate field is required." id="MedicationModel_Patient_LastUpdateDate" name="MedicationModel.Patient.LastUpdateDate"
+                            value="01.04.2017 16:09:13" type="hidden">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:top !important;" rowspan="6">
+                                        <span class="btnShowAdditionalInfos imgCommand" onclick="ShowPatientDetail()" style="display: none;"><i class="fa fa-chevron-right fa-lg"></i></span>
+                                        <span class="btnHideAdditionalInfos imgCommand" onclick="HidePatientDetail()"><i class="fa fa-chevron-down fa-lg"></i></span>
+                                    </td>
+                                    <td>
+                                        <table class="patientTable">
+                                            <thead>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="Label">
+                                                        Vorname *
+                                                    </td>
+
+                                                    <td class="Label" colspan="2">
+                                                        Nachname *
+                                                    </td>
+                                                    <td class="Label">
+                                                        Geburtsdatum *
+                                                    </td>
+                                                    <td class="Label">
+                                                        Geschlecht
+                                                    </td>
+                                                    <td class="Label" colspan="2">
+                                                        Versichertenkarten-Nummer
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input class="PatientFirstName" id="MedicationModel_Patient_FirstName" name="MedicationModel.Patient.FirstName" placeholder="Vorname" type="text">
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <input class="PatientLastName" id="MedicationModel_Patient_LastName" name="MedicationModel.Patient.LastName" placeholder="Nachname" style="width:190px" type="text">
+                                                    </td>
+                                                    <td>
+                                                        <span style="width: 100px;" class="k-widget k-datepicker k-header datePickerBirthDate birthDate PatientBirthDate"><span class="k-picker-wrap k-state-default"><input class="datePickerBirthDate birthDate PatientBirthDate k-input" id="BirthDate" name="MedicationModel.Patient.BirthDateString" onblur="BirthDateChanged($(this).val(), $('#hiddenBD'));" style="width: 100%;" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="BirthDate_dateview" aria-disabled="false" aria-readonly="false" type="text"><span unselectable="on" class="k-select" role="button" aria-controls="BirthDate_dateview"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>
+                                                        </span>
+                                                        </span>
+                                                        <input id="hiddenBD" value="" type="hidden">
+                                                    </td>
+                                                    <td>
+
+                                                        <span style="width: 90px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownMedium" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="GenderDropDown_listbox" aria-disabled="false" aria-readonly="false"
+                                                            aria-busy="false" aria-activedescendant="29c38f84-232f-49e9-8a6d-61a7e885face"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">?</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDownMedium" data-val="true" data-val-required="The Gender field is required." id="GenderDropDown" name="MedicationModel.Patient.Gender" onchange="GenderChanged(true);"
+                                                                data-role="dropdownlist" style="display: none;"><option value="Unknown" selected="selected">?</option><option value="Male">männlich</option><option value="Female">weiblich</option></select></span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <input class="cardNumber" id="MedicationModel_Patient_InsuranceCardNumber" name="MedicationModel.Patient.InsuranceCardNumber" onchange="CardNumberChanged();" onkeyup="CardNumberChanged(event.keyCode);" placeholder="Versichertenkarten-Nummer" style="width:180px"
+                                                            type="text">
+
+                                                        <button type="submit" value="ShowPatientInsuranceDetail" style="display:none" class="imgCommand cardNumberInfo" onclick="ShowPatientInsuranceDetail(); return false;"><i class="fa fa-credit-card" style="color:darkgrey;"></i></button>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tbody class="patientDetail" style="">
+                                                <tr>
+                                                    <td class="Label">
+                                                        Telefonnummer
+                                                    </td>
+
+                                                    <td class="Label" colspan="3">
+                                                        Strasse
+                                                    </td>
+                                                    <td class="Label">
+                                                        PLZ
+                                                    </td>
+                                                    <td class="Label" colspan="2">
+                                                        Ort
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input id="MedicationModel_Patient_PhoneNumber" name="MedicationModel.Patient.PhoneNumber" onchange="UpdatePatientLastUpdateDate();" placeholder="Telefonnummer" style="width:150px" type="text">
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <input class="PatientStreet" id="MedicationModel_Patient_Street" name="MedicationModel.Patient.Street" onchange="UpdatePatientLastUpdateDate()" placeholder="Strasse" style="width:300px" type="text">
+                                                    </td>
+                                                    <td>
+                                                        <input class="PatientZip" id="MedicationModel_Patient_Zip" name="MedicationModel.Patient.Zip" onchange="UpdatePatientLastUpdateDate()" placeholder="PLZ" style="width:50px" type="text">
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <input class="PatientCity" id="MedicationModel_Patient_City" name="MedicationModel.Patient.City" onchange="UpdatePatientLastUpdateDate()" placeholder="Ort" style="width:200px" type="text">
+                                                    </td>
+
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="Label">
+                                                        Patientensprache *
+                                                    </td>
+                                                    <td class="Label">
+                                                        Gewicht
+                                                    </td>
+
+                                                    <td class="Label">
+                                                        Körpergrösse
+                                                    </td>
+                                                    <td class="Label">
+                                                        BMI
+                                                    </td>
+                                                    <td class="Label" colspan="2">
+                                                        <span class="onlyAdult" style="display:none">
+                                Reproduktion
+                            </span>
+                                                        <span class="onlyChild" style="display:none">
+                                Frühgeborenes
+                            </span>
+                                                    </td>
+                                                    <td class="Label">
+                                                        <span class="onlyPregnant" style="display:none">
+                                1. Tag letzte Periode
+                            </span>
+                                                        <span class="onlyPremature" style="display:none">
+                                Gestationsalter
+                            </span>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span style="width: 140px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="MedicationModel_Patient_Language_listbox" aria-disabled="false"
+                                                            aria-readonly="false" aria-busy="false" aria-activedescendant="90d1513d-5496-4bf3-bd7d-1f3bcd44b58b"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">Deutsch</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDown" id="MedicationModel_Patient_Language" name="MedicationModel.Patient.Language" data-role="dropdownlist" style="display: none;"><option value="DE" selected="selected">Deutsch</option><option value="FR">Français</option><option value="IT">Italiano</option><option value="TR">Turkish</option><option value="SQ">Albanian</option><option value="ES">Spanish</option><option value="PT">Portuguese</option><option value="SR">Serbian</option></select></span>
+                                                    </td>
+                                                    <td>
+                                                        <input class="weightTextBox" data-val="true" data-val-number="The field Weight must be a number." id="MedicationModel_Patient_Weight" name="MedicationModel.Patient.Weight" onblur="MeasurementChanged();RefreshAllCdsCheck();" style="width:30px" type="text">                                                        kg
+                                                    </td>
+                                                    <td>
+                                                        <input class="heightTextBox" data-val="true" data-val-number="The field Height must be a number." id="MedicationModel_Patient_Height" name="MedicationModel.Patient.Height" onblur="MeasurementChanged();RefreshAllCdsCheck();" style="width:30px" type="text">                                                        cm
+                                                    </td>
+                                                    <td>
+                                                        <span id="BMI">?</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span class="onlyAdult" style="display:none">
+                                <span style="" title="" class="k-widget k-dropdown k-header reproductionDropDown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="ReproductionDropDown_listbox" aria-disabled="false" aria-readonly="false" aria-busy="false"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input"></span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="reproductionDropDown" data-val="true" data-val-required="The Reproduction field is required." id="ReproductionDropDown" name="MedicationModel.Patient.Reproduction" onchange="SelectReproduction($(this).val(), true)"
+                                                                data-role="dropdownlist" style="display: none;"></select></span>
+                                                            </span>
+                                                            <span class="onlyChild" style="display:none">
+                                <input class="radioPremature" data-val="true" data-val-required="The IsPrematureBaby field is required." id="MedicationModel_Patient_IsPrematureBaby" name="MedicationModel.Patient.IsPrematureBaby" onclick="PrematureChanged()" value="Yes" type="radio"> Ja
+                                <input class="radioPremature" id="MedicationModel_Patient_IsPrematureBaby" name="MedicationModel.Patient.IsPrematureBaby" onclick="PrematureChanged()" value="No" type="radio"> Nein
+
+                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="onlyPregnant" style="display:none">
+                                <span style="width: 100px;" class="k-widget k-datepicker k-header datePickerFirstDayLastMenstruation"><span class="k-picker-wrap k-state-default"><input class="datePickerFirstDayLastMenstruation  k-input" id="FirstDayLastMenstruation" name="MedicationModel.Patient.FirstDayLastMenstruationString" onblur="FirstDayLastMenstruationEdited($(this).val())" onchange="UpdatePatientLastUpdateDate()" style="width: 100%;" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="FirstDayLastMenstruation_dateview" aria-disabled="false" aria-readonly="false" type="text"><span unselectable="on" class="k-select" role="button" aria-controls="FirstDayLastMenstruation_dateview"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>
+                                                        </span>
+                                                        </span>
+                                                        <input id="hiddenFirstDayLastMenstruation" value="" type="hidden">
+                                                        <span id="spanTrimester">
+
+                                </span>
+                                                        </span>
+                                                        <span class="onlyPremature" style="display:none">
+                                <span style="width: 50px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownTiny" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="MedicationModel_Patient_WeeksOfGestation_listbox" aria-disabled="false" aria-readonly="false" aria-busy="false" aria-activedescendant="4a96e40e-66a3-44fb-90fc-248c854b9223"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">-</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDownTiny" data-val="true" data-val-number="The field WeeksOfGestation must be a number." id="MedicationModel_Patient_WeeksOfGestation" name="MedicationModel.Patient.WeeksOfGestation"
+                                                                onchange="RefreshAllCdsCheck();UpdatePatientLastUpdateDate();" data-role="dropdownlist" style="display: none;"><option value="" selected="selected">-</option><option value="36">36</option><option value="35">35</option><option value="34">34</option><option value="33">33</option><option value="32">32</option><option value="31">31</option><option value="30">30</option><option value="29">29</option><option value="28">28</option><option value="27">27</option><option value="26">26</option><option value="25">25</option><option value="24">24</option><option value="23">23</option><option value="22">22</option></select></span>
+                                                            <span style="width: 50px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownTiny" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="MedicationModel_Patient_DaysOfGestation_listbox" aria-disabled="false"
+                                                                aria-readonly="false" aria-busy="false" aria-activedescendant="66bcc315-3b7d-432d-a752-8fc93d4fc7e5"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">-</span>
+                                                            <span
+                                                                unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                                </span><select class="kendoLikeDropDownTiny" data-val="true" data-val-number="The field DaysOfGestation must be a number." id="MedicationModel_Patient_DaysOfGestation" name="MedicationModel.Patient.DaysOfGestation"
+                                                                    onchange="RefreshAllCdsCheck();UpdatePatientLastUpdateDate();" data-role="dropdownlist" style="display: none;"><option value="" selected="selected">-</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></span>
+                                                                </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="Label">
+                                                        Leistungssportler
+                                                    </td>
+                                                    <td class="Label" colspan="2" onclick="ShowClearanceCalculator()" style="cursor:pointer">
+                                                        Niereninsuffizienz
+                                                    </td>
+                                                    <td class="Label" colspan="2">
+                                                        Leberinsuffizienz
+                                                    </td>
+                                                    <td class="Label" colspan="2">
+                                                        Empfänger
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="1">
+                                                        <span style="width: 80px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownSmall" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="CompetitiveAthleteDropDown_listbox" aria-disabled="false"
+                                                            aria-readonly="false" aria-busy="false" aria-activedescendant="5f53adc7-63d0-4d7a-923d-a2701bafdbdb"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">nein</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDownSmall" data-val="true" data-val-required="The IsCompetitiveAthlete field is required." id="CompetitiveAthleteDropDown" name="MedicationModel.Patient.IsCompetitiveAthlete"
+                                                                onchange="UpdatePatientLastUpdateDate();RefreshAllCdsCheck();" data-role="dropdownlist" style="display: none;"><option value="Unknown">?</option><option value="Yes">ja</option><option value="No" selected="selected">nein</option></select></span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span style="width: 200px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownBig" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="RenalInsufficiencyDropDown_listbox" aria-disabled="false"
+                                                            aria-readonly="false" aria-busy="false" aria-activedescendant="2f510353-863b-4515-9d55-725470160022"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">keine</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDownBig" data-val="true" data-val-required="The RenalInsufficiencyLevel field is required." id="RenalInsufficiencyDropDown" name="MedicationModel.Patient.RenalInsufficiencyLevel"
+                                                                onchange="UpdatePatientLastUpdateDate();RefreshAllCdsCheck();" data-role="dropdownlist" style="display: none;"><option value="0">?</option><option value="1" selected="selected">keine</option><option value="2">leicht (Clcr 60-90 ml/min)</option><option value="3">mittelschwer (Clcr 30-60 ml/min)</option><option value="4">schwer (Clcr 15-30 ml/min)</option><option value="5">terminal (Clcr &lt;15 ml/min)</option></select></span>
+                                                            <button type="submit" value="ShowClearanceCalculator" class="command" onclick="ShowClearanceCalculator();return false;"><i class="fa fa-calculator" style="color:darkgrey;" onclick="ShowClearanceCalculator()"></i></button>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span style="width: 200px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownBig" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="LiverInsufficiencyDropDown_listbox" aria-disabled="false"
+                                                            aria-readonly="false" aria-busy="false" aria-activedescendant="3629c352-608c-4ca7-b546-2ab67b339edf"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">keine</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDownBig" data-val="true" data-val-required="The LiverInsufficiencyLevel field is required." id="LiverInsufficiencyDropDown" name="MedicationModel.Patient.LiverInsufficiencyLevel"
+                                                                onchange="UpdatePatientLastUpdateDate();RefreshAllCdsCheck();" data-role="dropdownlist" style="display: none;"><option value="0">?</option><option value="1" selected="selected">keine</option><option value="2">leichte Child-Pugh A</option><option value="3">mittelschwere Child-Pugh B</option><option value="4">schwere Child-Pugh C</option></select></span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span style="width: 300px;" class="k-widget k-combobox k-header ReceiverDropDown"><span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input name="MedicationModel.Patient.ReceiverName_input" class="k-input ReceiverDropDown" autocomplete="off" style="width: 100%;" title="" role="combobox" aria-expanded="false" placeholder="Search Receiver" tabindex="0" aria-disabled="false" aria-readonly="false" aria-autocomplete="list" aria-owns="DDReceivers_listbox" aria-busy="false" type="text"><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s" role="button" tabindex="-1" aria-controls="DDReceivers_listbox">select</span></span>
+                                                        </span><input class="ReceiverDropDown" id="DDReceivers" name="MedicationModel.Patient.ReceiverName" data-role="combobox" style="display: none;" aria-disabled="false" aria-readonly="false" type="text"></span>
+                                                        <input class="hiddenReceiverPtNumber" data-val="true" data-val-number="The field ReceiverPartnerNumber must be a number." id="MedicationModel_Patient_ReceiverPartnerNumber" name="MedicationModel.Patient.ReceiverPartnerNumber" value="" type="hidden">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7" class="Label">
+                                                        Allergie(n)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="1">
+                                                        <span style="width: 80px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownSmall" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="HasAllergiesDropDown_listbox" aria-disabled="false" aria-readonly="false"
+                                                            aria-busy="false" aria-activedescendant="88859dfb-0bbd-4fcf-a5c9-7576297ae795"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">nein</span>
+                                                        <span
+                                                            unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                                            </span><select class="kendoLikeDropDownSmall" data-val="true" data-val-required="The HasAllergies field is required." id="HasAllergiesDropDown" name="MedicationModel.Patient.HasAllergies" onchange="AllergiesHasChanged();UpdatePatientLastUpdateDate();RefreshAllCdsCheck();"
+                                                                data-role="dropdownlist" style="display: none;"><option value="Unknown">?</option><option value="Yes">ja</option><option value="No" selected="selected">nein</option></select></span>
+                                                            <input class="patientAllergiesString" id="MedicationModel_Patient_AllergiesString" name="MedicationModel.Patient.AllergiesString" value="" type="hidden">
+                                                            <button type="submit" value="ShowAllergies" style="display:none" class="imgCommand btnShowAllergies" onclick="ShowAllergies(); return false;"><i class="fa fa-credit-card" style="color:darkgrey;"></i></button>
+                                                    </td>
+                                                    <td colspan="6">
+                                                        <span class="AllergiesDisplay" style="display:none"></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                        <input id="ageInMonths" value="24194" type="hidden">
+                        <input id="AllergiesLoaded" value="0" type="hidden">
+
+
+
+                        <script type="text/javascript">
+                            function AllergiesHasChanged() {
+                                var hasAllergies = GetHasAllergies();
+                                var btn = $(".btnShowAllergies");
+                                var span = $(".AllergiesDisplay");
+                                if (hasAllergies === "Yes") {
+                                    btn.show();
+                                    span.show();
+                                } else {
+                                    btn.hide();
+                                    span.hide();
+                                }
+                            }
+
+                            function GetHasAllergies() {
+                                return $('#HasAllergiesDropDown').val();
+                            }
+
+                            function GetAllergies() {
+                                var allergies;
+                                $.ajax({
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    url: '/Webapplications/MafIntern/Cds/GetAllergies',
+                                    async: false,
+                                    success: function(data) {
+                                        allergies = data;
+                                    },
+                                    error: function(xhr, ajaxOptions, thrownError) {
+                                        alert("error");
+                                    }
+                                });
+                                return allergies;
+                            }
+
+                            function UpdateAgeInDialog() {
+                                CalculateAgeInYears();
+                            }
+
+                            function TakeValues() {
+                                SetBirthDate(GetBirthDateInDialog());
+                                SetWeight(GetWeightInDialog());
+                                MeasurementChanged();
+                                if (GetGenderInDialog() !== GetGender()) {
+                                    $('#GenderDropDown').data("kendoDropDownList").value(GetGenderInDialog());
+                                }
+
+                                $('#RenalInsufficiencyDropDown').data("kendoDropDownList").value($("#RenalInsufficiencyLevelId").val());
+                                renalInsufficiencyCalculatorDialog.dialog("close");
+                                RefreshAllCdsCheck();
+
+                            }
+
+                            function ShowClearanceCalculator() {
+
+                                var birthDate = GetBirthDate();
+                                var weight = GetWeight();
+                                $("#birthDateInDialog").data("kendoDatePicker").value(birthDate);
+                                $("#hiddenBDInDialog").val(birthDate);
+                                $(".weightInDialog").val(weight);
+
+
+                                $('#GenderDropDownInDialog').data("kendoDropDownList").value(GetGender());
+
+                                renalInsufficiencyCalculatorDialog.dialog("open");
+                            }
+                            renalInsufficiencyCalculatorDialog = $("#RenalInsufficiencyCalculatorDialog").dialog({
+                                autoOpen: false,
+                                height: 380,
+                                width: 450,
+                                modal: true,
+                                close: function() {
+
+                                }
+                            });
+
+
+
+                            function CloseAllergyDialog(allergies) {
+                                $(".patientAllergiesString").val(allergies);
+                                SetAllergyDisplay();
+
+                                AllergiesDialog.dialog("close");
+                                RefreshAllCdsCheck();
+                            }
+
+                            function SetAllergyDisplay() {
+                                var allergies = $(".patientAllergiesString").val();
+                                $.ajax({
+                                    url: '/Webapplications/MafIntern/Cds/GetAllergiesDescriptions/' + '?allergies=' + allergies,
+                                    cache: false,
+                                    success: function(html) {
+                                        $(".AllergiesDisplay").html(html);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        alert(error);
+                                    }
+                                });
+                            }
+
+                            function ShowAllergies() {
+
+                                //if ($("#AllergiesLoaded").val() === '0')
+                                //{
+                                $.ajax({
+                                    type: "POST",
+                                    url: '/Webapplications/MafIntern/CDS/GetAllergyBrowser',
+                                    async: true,
+                                    success: function(html) {
+                                        $("#AllergiesDialog").html(html);
+                                        SelectAllergies();
+                                        AllergiesDialog.dialog("open");
+                                    },
+                                    error: function(xhr, status, error) {
+                                        alert(error);
+                                    }
+                                });
+                                //    //$("#AllergiesLoaded").val(1);
+                                //}
+                                //else
+                                //{
+                                //    SelectAllergies();
+                                //    AllergiesDialog.dialog("open");
+                                //}
+                            }
+
+                            function SelectAllergies() {
+
+                                if ($(".patientAllergiesString").val()) {
+                                    $(".patientAllergiesString").val().trim().split(',').forEach(function(allergyId) {
+                                        SelectAllergy(parseInt(allergyId), '');
+                                    });
+                                }
+                            }
+
+                            AllergiesDialog = $("#AllergiesDialog").dialog({
+                                autoOpen: false,
+                                height: 700,
+                                width: 1000,
+                                modal: true,
+                                close: function() {
+
+                                }
+                            });
+
+
+
+
+                            $(document).ready(function() {
+
+                                ShowPatientDetail();
+                                //GenderChanged();
+
+                                MeasurementChanged();
+                            });
+
+
+
+                            function ShowPatientDetail() {
+                                $("#Patient").find(".patientDetail").each(function(index) {
+                                    $(this).show();
+                                });
+
+                                $("#Patient").find(".btnShowAdditionalInfos").each(function(index) {
+
+                                    $(this).hide();
+                                });
+
+                                $("#Patient").find(".btnHideAdditionalInfos").each(function(index) {
+                                    $(this).show();
+                                });
+
+                            }
+
+                            function HidePatientDetail() {
+                                $("#Patient").find(".patientDetail").each(function(index) {
+                                    $(this).hide();
+                                });
+                                $("#Patient").find(".btnShowAdditionalInfos").each(function(index) {
+                                    $(this).show();
+                                });
+
+                                $("#Patient").find(".btnHideAdditionalInfos").each(function(index) {
+                                    $(this).hide();
+                                });
+                            }
+
+                            function GetBirthDate() {
+                                return $("#hiddenBD").val();
+                            }
+
+                            function GetBirthDateInDialog() {
+                                return $("#hiddenBDInDialog").val();
+                            }
+
+                            function SetBirthDate(value) {
+
+                                if (value !== $("#hiddenBD").val()) {
+                                    $("#hiddenBD").val(value);
+                                    $("#BirthDate").data("kendoDatePicker").value(value);
+                                    BDateChanged();
+                                }
+
+                            }
+
+
+                            function GetWeight() {
+                                return $(".weightTextBox").val();
+                            }
+
+                            function GetWeightInDialog() {
+                                return $(".weightInDialog").val();
+                            }
+
+                            function GetHeight() {
+                                return $(".heightTextBox").val();
+                            }
+
+                            function GetGenderInDialog() {
+                                return $('#GenderDropDownInDialog').data("kendoDropDownList").value();
+                            }
+
+
+                            function SetWeight(value) {
+                                $(".weightTextBox").val(value);
+                            }
+
+                            function GetFirstDayOfMenstruationDate() {
+                                return $('#hiddenFirstDayLastMenstruation').val();
+                            }
+
+                            function GenderChanged(mustSelectReproduction) {
+
+                                var gender = GetGender();
+
+                                if (gender !== 'Unknown') {
+                                    RebindReproductions();
+                                }
+
+                                var ageInMonths = parseInt(GetAgeInMonths());
+                                var reproductionId = '1';
+                                $("#Patient").find(".onlyAdult").each(function(index) {
+
+
+                                    if (ageInMonths >= 120 && ageInMonths <= 1500 && gender !== "Unknown") {
+                                        $(this).show();
+                                    } else {
+                                        $(this).hide();
+                                    }
+                                });
+
+                                if (gender === "Female" && ageInMonths >= 156 && ageInMonths <= 600) {
+                                    reproductionId = '4';
+                                }
+                                if (gender === "Male" && ageInMonths >= 156 && ageInMonths <= 840) {
+                                    reproductionId = '5';
+                                }
+
+                                if (mustSelectReproduction) {
+                                    SelectReproduction(reproductionId, false);
+                                    if (!(reproductionId === '4' || reproductionId === '5')) {
+                                        reproductionId = null;
+                                    }
+                                } else {
+                                    reproductionId = null;
+                                }
+
+
+
+
+                                //RefreshAllCdsCheckWithReproduction(reproductionId);
+                                RefreshAllCdsCheck();
+                                UpdatePatientLastUpdateDate();
+                            }
+
+                            function RebindReproductions() {
+                                $("#ReproductionDropDown").data("kendoDropDownList").dataSource.read();
+                            }
+
+                            function SelectReproduction(reproduction, mustRefreshCds) {
+                                $('#ReproductionDropDown').data("kendoDropDownList").value(reproduction);
+                                $("#Patient").find(".onlyPregnant").each(function(index) {
+                                    if (reproduction === '2') {
+                                        $(this).show();
+                                    } else {
+                                        $(this).hide();
+                                    }
+                                });
+
+                                if (mustRefreshCds) {
+                                    RefreshAllCdsCheck();
+                                }
+
+                            }
+
+                            function PrematureChanged() {
+
+                                var premature = GetPremature();
+                                var ageInMonths = GetAgeInMonths();
+                                $("#Patient").find(".onlyPremature").each(function(index) {
+                                    if (premature === "Yes" && ageInMonths < 18) {
+                                        $(this).show();
+                                    } else {
+                                        $(this).hide();
+                                    }
+                                });
+                                RefreshAllCdsCheck();
+                                UpdatePatientLastUpdateDate();
+                            }
+
+                            function CompetitiveAthleteChanged() {
+                                UpdatePatientLastUpdateDate();
+                                RefreshAllCdsCheck();
+                            }
+
+                            function FirstDayLastMenstruationEdited(date) {
+                                $('#hiddenFirstDayLastMenstruation').val(date);
+                                $.ajax({
+                                    url: '/Webapplications/MafIntern/Cds/GetTrimester/?date=' + encodeURIComponent(date),
+                                    cache: false,
+                                    success: function(trimester) {
+                                        $("#spanTrimester").html(trimester);
+                                    },
+                                    error: function(result, status, error) {
+                                        alert(error);
+                                    }
+                                });
+                                RefreshAllCdsCheck();
+                            }
+
+                            function MeasurementChanged() {
+                                $.ajax({
+                                    url: '/Webapplications/MafIntern/Cds/GetBmi/?weight=' + encodeURIComponent(GetWeight()) + '&height=' + encodeURIComponent(GetHeight()),
+                                    cache: false,
+                                    success: function(bmi) {
+                                        $("#BMI").html(bmi);
+                                    },
+                                    error: function(result, status, error) {
+                                        alert(error);
+                                    }
+                                });
+                            }
+
+                            function CalculateCreatininClearance() {
+                                var parameters = '?gender=' + GetGenderInDialog() + '&weight=' + GetWeightInDialog() + '&birthDate=' + encodeURIComponent(GetBirthDateInDialog());
+                                parameters = parameters + '&creatinin=' + $(".creatininTextBox").val() + '&creatininUnit=' + GetCreatininUnit();
+                                $.ajax({
+                                    url: '/Webapplications/MafIntern/Cds/CalculateCreatininClearance/' + parameters,
+                                    cache: false,
+                                    async: false,
+                                    success: function(creatininClearance) {
+                                        $(".creatininClearanceTextBox").val(creatininClearance);
+                                        SetRenalInsufficiencyLevel(creatininClearance);
+                                    },
+                                    error: function(result, status, error) {
+                                        alert('CalculateCreatininClearance : ' + error);
+                                    }
+                                });
+
+                            }
+
+
+                            function RenalInsufficiencyLevelObj(id, text) {
+                                var self = this;
+                                self.Id = id;
+                                self.Text = text;
+                            }
+
+                            function GetCoordinates(callback) {
+                                $.ajax({
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    url: '/Webapplications/MafIntern/PointOfSale/GetCoordinates',
+                                    data: null,
+                                    success: function(data) {
+                                        callback(data);
+                                    },
+                                    error: function(xhr, ajaxOptions, thrownError) {
+                                        callback(null);
+                                    }
+                                });
+                            }
+
+                            function SetRenalInsufficiencyLevel(creatininClearance) {
+                                if (creatininClearance.length > 0) {
+
+                                    $.ajax({
+                                        type: 'GET',
+                                        dataType: 'json',
+                                        contentType: 'application/json',
+                                        url: '/Webapplications/MafIntern/Cds/GetRenalInsufficiencyLevel/' + creatininClearance.replace(".", "-"),
+                                        cache: false,
+                                        async: false,
+                                        success: function(level) {
+                                            $("#RenalInsufficiencyLevel").html(level.Text);
+                                            $("#RenalInsufficiencyLevelId").val(level.Id);
+                                        },
+                                        error: function(result, status, error) {
+                                            alert('SetRenalInsufficiencyLevel : ' + error + result);
+                                        }
+                                    });
+                                } else {
+                                    $("#RenalInsufficiencyLevel").html("?");
+                                }
+                            }
+
+                            function CreatininUnitChanged() {
+                                CalculateCreatininClearance();
+                            }
+
+
+                            function GetPremature() {
+                                var premature = $('.radioPremature:checked').val();
+                                if (premature === undefined) {
+                                    premature = "Unknown";
+                                }
+                                return premature;
+                            }
+
+                            function GetCompetitiveAthlete() {
+                                var competitiveAthlete = $('.CompetitiveAthlete:checked').val();
+                                if (competitiveAthlete === undefined) {
+                                    competitiveAthlete = "Unknown";
+                                }
+                                return competitiveAthlete;
+                            }
+
+                            function GetCreatininUnit() {
+                                var unit = $('.radioCreatininUnit:checked').val();
+                                if (unit === undefined) {
+                                    unit = "Unknown";
+                                }
+                                return unit;
+                            }
+
+                            function BirthDateChanged(value, hiddenField) {
+                                hiddenField.val(value);
+
+                                CalculateAgeInMonths();
+                                BDateChanged();
+                                GenderChanged(true);
+                            }
+
+                            function BDateChanged() {
+                                CalculateAgeInMonths();
+                                var ageInMonths = GetAgeInMonths();
+                                $("#Patient").find(".onlyChild").each(function(index) {
+                                    if (ageInMonths <= 18) {
+                                        $(this).show();
+                                    } else {
+                                        $(this).hide();
+
+                                    }
+                                });
+                                if (ageInMonths > 18) {
+                                    $("#Patient").find(".onlyPremature").each(function(index) {
+                                        $(this).hide();
+                                    });
+                                }
+
+
+                            }
+
+                            function GetAgeInMonths() {
+                                return parseInt($("#ageInMonths").val());
+                            }
+
+                            function ValueChanged(value, hiddenField) {
+                                hiddenField.val(value);
+
+                            }
+
+                            function CalculateAgeInMonths() {
+                                var birthDate = encodeURIComponent(GetBirthDate());
+                                var ageInMonths = 2500;
+                                if (birthDate.length > 0) {
+                                    $.ajax({
+                                        url: '/Webapplications/MafIntern/Cds/GetAgeInMonths/?birthDate=' + birthDate,
+                                        cache: false,
+                                        async: false,
+                                        success: function(age) {
+                                            ageInMonths = age;
+                                        },
+                                        error: function(result, status, error) {
+                                            alert('CalculateAgeInMonths : ' + error);
+
+                                        }
+                                    });
+                                }
+
+                                $("#ageInMonths").val(ageInMonths);
+                            }
+
+                            function CalculateAgeInYears() {
+                                var birthDate = encodeURIComponent(GetBirthDateInDialog());
+                                var ageInYears = "?";
+                                if (birthDate.length > 0) {
+                                    $.ajax({
+                                        url: '/Webapplications/MafIntern/Cds/GetAgeInYears/?birthDate=' + birthDate,
+                                        cache: false,
+                                        async: false,
+                                        success: function(age) {
+                                            ageInYears = age + ' Jahre alt';
+                                        },
+                                        error: function(result, status, error) {
+                                            alert('CalculateAgeInYears : ' + error);
+
+                                        }
+                                    });
+                                }
+
+                                $("#ageInDialog").html(ageInYears);
+                            }
+
+                            function CreatininValueChanged(value) {
+                                CalculateCreatininClearance();
+                            }
+
+                            function CreatininClearanceValueChanged(value) {
+
+                                SetRenalInsufficiencyLevel(value);
+                                RefreshAllCdsCheck();
+                            }
+                        </script>
+
+                    </div>
+
+
+                    <hr>
+                    <h2>Medikamente</h2>
+
+
+                    <table id="MedicationTable" class="ui-sortable">
+                        <thead class="ui-sortable-handle">
+                            <tr>
+                                <td class="columnOpenClose"></td>
+                                <td class="columnDescription"></td>
+                                <td class="columnDose"></td>
+                                <td class="columnDose"></td>
+                                <td class="columnDose"></td>
+                                <td class="columnDose"></td>
+                                <td class="columnDoseUnit"></td>
+                                <td class="columnFrom"></td>
+                                <td class="columnCommand"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <nobr>
+                                        <span style="width: 300px;" class="k-widget k-combobox k-header"><span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input name="DDProductsToInsert_input" class="k-input" autocomplete="off" style="width: 100%;" title="" role="combobox" aria-expanded="false" placeholder="Produkt suchen" tabindex="0" aria-disabled="false" aria-readonly="false" aria-autocomplete="list" aria-owns="DDProductsToInsert_listbox" aria-busy="false" type="text"><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s" role="button" tabindex="-1" aria-controls="DDProductsToInsert_listbox">select</span></span>
+                                        </span><input id="DDProductsToInsert" name="DDProductsToInsert" data-role="combobox" style="display: none;" aria-disabled="false" aria-readonly="false"></span>
+                                        <button type="submit" id="addMedicamentButton" value="Save" name="command" class="command" onclick="AddMedicationMedicament(-100); return false;" style="margin-top:5px;">+Freitext</button>
+                                    </nobr>
+                                </td>
+                                <td class="DoseCell">
+                                    <span title="Morgen">Morgen</span>
+                                </td>
+                                <td class="DoseCell">
+                                    <span title="Mittag">Mittag</span>
+                                </td>
+                                <td class="DoseCell">
+                                    <span title="Abend">Abend</span>
+                                </td>
+                                <td class="DoseCell">
+                                    <span title="zur Nacht">zur Nacht</span>
+                                </td>
+                                <td>
+                                    Einheit
+                                </td>
+                                <td>
+                                    Von
+                                    <br> bis u. mit
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12"><span class="spacingRow">&nbsp;</span></td>
+                            </tr>
+                            <tr id="wait">
+                                <td colspan="12"><img id="waitImg" style="display:none" src="Medication%20Active%20Form%20%28MAF%29-Dateien/loading.gif"></td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <hr width="100%">
+                    <div id="MedicationRemark" width="100%">
+                        <p class="Label">Bemerkung</p>
+                        <textarea cols="20" id="MedicationModel_Remark" name="MedicationModel.Remark" rows="2" style="font-family:Arial;"></textarea>
+                    </div>
+
+                    <span id="NextMedicationMedicamentNr" style="display:none">0</span>
+                    <br>
+
+
+
+                </div>
+            </form>
+            <hr width="100%">
+
+
+            <script type="text/javascript">
+                function ShowCompleteCdsCheckPopup(mainProductNr, currentType) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Webapplications/MafIntern/CDS/GetCdsCheckDetail' + '?mainProductNr=' + mainProductNr + '&currentCheckType=' + currentType,
+                        data: $("#mainForm").serialize(),
+                        success: function(html) {
+                            $("#CompleteCdsCheckPopupContent").html(html);
+                            CompleteCdsCheckPopup.dialog("open");
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+
+
+
+                }
+
+                function ShowNewCds() {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Webapplications/MafIntern/Edit/GetCodeSessionId',
+                        data: $("#mainForm").serialize(),
+                        success: function(codeResult) {
+                            window.open('/Webapplications/MafIntern/Cds/ShowNewCds/' + codeResult)
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+                }
+
+                CompleteCdsCheckPopup = $("#CompleteCdsCheckPopup").dialog({
+                    autoOpen: false,
+                    height: 750,
+                    width: 1200,
+                    modal: true,
+                    close: function() {
+
+                    }
+                });
+
+                function CdsCheckSelectionChanged() {
+
+                    var product = $("#CdsCheckProductDropDown").val();
+                    var risk = $("#CdsCheckRiskDropDown").val();
+
+                    if (risk === "InteractionFlyCicleCh") {
+                        product = "0";
+                    }
+
+
+
+                    history.pushState({
+                        productNr: product,
+                        riskId: risk
+                    }, null, "");
+                    DisplaySingleCheckItem(product, risk);
+
+                };
+
+                function DisplaySingleCheckItem(product, risk) {
+                    $(".cdsCheckToggle").hide();
+                    $(".cdsCheckToggle-" + risk).show();
+
+                    $(".completeCheckItem").hide();
+                    $("#completeCheckItem-" + product).fadeIn(600);
+                }
+
+                window.onpopstate = function(event) {
+                    var content = "";
+                    if (event.state) {
+                        $('#CdsCheckProductDropDown').data("kendoDropDownList").value(event.state.productNr);
+                        $('#CdsCheckRiskDropDown').data("kendoDropDownList").value(event.state.riskId);
+                        DisplaySingleCheckItem(event.state.productNr, event.state.riskId);
+                    } else {
+                        $("#CompleteCdsCheckPopup").dialog("close");
+                    }
+                }
+            </script>
+            <div class="DivCommand">
+
+                <button type="submit" id="resetButton" value="Reset" name="command" class="command" onclick="PostWithoutValidation('Reset'); return false;"><i class="fa fa-trash" style="color:darkgrey;"></i> Löschen</button> &nbsp;&nbsp;
+                <button type="submit" id="saveButton" value="Save" name="command" class="command enableDisableButton" onclick="ChangeCommandAndPost('Save');return false;" disabled="disabled"><i class="fa fa-cloud-download fa-lg" style="color:darkgrey;"></i> Speichern</button>
+                <button type="submit" id="sendButton" value="Send" name="command" class="command enableDisableButtonSend" onclick="ChangeCommandAndPost('Send'); return false;" disabled="disabled"><i class="fa fa-share-alt fa-lg" style="color:darkgrey;"></i> Senden</button>                &nbsp;&nbsp;
+                <button type="submit" id="printButton" value="Print" name="command" class="command enableDisableButton" onclick="PreparePrint();ChangeCommandAndPost('Print'); return false;" disabled="disabled"><i class="fa fa-print fa-lg" style="color:darkgrey;"></i> Drucken</button>                &nbsp; &nbsp;
+                <button type="submit" id="openCdsButton" value="Print" name="command" class="command enableDisableButton" onclick="ShowCompleteCdsCheckPopup(null, null);" disabled="disabled"><i class="fa fa-bolt fa-lg"></i> CDS</button>
+                <button type="submit" id="openNewCdsButton" value="Print" name="command" class="command enableDisableButton" onclick="ShowNewCds();" disabled="disabled"><i class="fa fa-bolt fa-lg"></i> !! NEW CDS !!</button>
+            </div>
+
+
+
+
+
+
+
+
+
+            <script type="text/javascript">
+                function TakeVekaData() {
+
+                    $(".PatientFirstName").val($("#PatientVekaFirstName").val());
+                    $(".PatientLastName").val($("#PatientVekaLastName").val());
+                    $(".PatientStreet").val($("#PatientVekaStreet").val());
+                    $(".PatientZip").val($("#PatientVekaZip").val());
+                    $(".PatientCity").val($("#PatientVekaCity").val());
+                    SetBirthDate($("#PatientVekaBirthDate").val());
+                    $('#GenderDropDown').data("kendoDropDownList").value($("#PatientVekaGender").val());
+
+                    GenderChanged(true);
+                    dialogVeka.dialog("close");
+                }
+
+
+
+
+
+                function RefreshAllCdsCheck() {
+
+                    if (GetProductNrs()) {
+                        $("#MedicationTable").find(".inputProductNr").each(function(index) {
+
+                            if ($(this).parent().parent().find('.itemToBeDeleted').val() !== 'True') {
+                                SetCdsCheck($(this).val(), "<img src='/Webapplications/MafIntern/Content/Images/Icons/loading.gif'/>");
+                            }
+                        });
+
+                        $("#openCdsButton").html("<img src='/Webapplications/MafIntern/Content/Images/Icons/loading.gif' class='CDSImage' /> CDS");
+
+                        $.ajax({
+                            type: "POST",
+                            url: '/Webapplications/MafIntern/CDS/GetCdsCompleteCheck',
+                            data: $("#mainForm").serialize(),
+                            async: true,
+                            success: function(data) {
+                                if (data.Relevance === "" || data.Relevance === "Disabled" || data.Relevance === "NotApplicable") {
+                                    $("#openCdsButton").html("CDS");
+                                } else {
+                                    $("#openCdsButton").html("<img src='/Webapplications/MafIntern/Content/Images/Icons/Cds/" + data.Relevance + ".svg' style='weight:20px;height:20px' alt='" + data.Relevance + "' title='" + data.Relevance +
+                                        "' class='CDSImage' /> CDS");
+                                }
+
+
+                                for (i = 0; i < data.Medicaments.length; i++) {
+                                    var cdsCheckHtml = "<table><tr>";
+                                    var hasActiveRisks = false;
+                                    for (j = 0; j < data.Medicaments[i].CdsModules.length; j++) {
+                                        var risk = data.Medicaments[i].CdsModules[j];
+                                        if (risk.Relevance === 'Disabled' || risk.Relevance === 'NotApplicable') {
+                                            cdsCheckHtml += "<td style='text-align:center;white-space:nowrap;'><div style='height:50px;width:50px;position:relative'><img src='/Webapplications/MafIntern/Content/Images/Icons/Cds/Modules/" +
+                                                risk.Code + "_Inactive.svg' style='position:absolute;top:0px;left:0px;width:30px;height:30px' alt='" + risk.Remark + "' title='" + risk.Remark + "' onclick=\"" + risk.OnClickScript +
+                                                "\"  /></div></td>"
+                                        } else {
+                                            hasActiveRisks = true;
+                                            cdsCheckHtml += "<td style='text-align:center;white-space:nowrap;'><div style='height:50px;width:50px;position:relative'><img src='/Webapplications/MafIntern/Content/Images/Icons/Cds/Modules/" +
+                                                risk.Code + ".svg' style='position:absolute;top:0px;left:0px;width:30px;height:30px' alt='" + risk.Remark + "' title='" + risk.Remark + "' onclick=\"" + risk.OnClickScript +
+                                                "\"  /><img src='/Webapplications/MafIntern/Content/Images/Icons/Cds/" + risk.Relevance + ".svg' style='position:absolute;top:18px;left:18px;width:18px;height:18px' alt='" + risk.Title +
+                                                "' title='" + risk.Title + "' /></div></td>"
+                                        }
+                                    }
+                                    cdsCheckHtml += "</tr></table>";
+                                    if (!hasActiveRisks)
+                                        cdsCheckHtml = "";
+                                    var imgUrl = "/Webapplications/MafIntern/Content/Images/Icons/Kispi.png";
+                                    if (!(data.Medicaments[i].KispiUrl === ""))
+                                        cdsCheckHtml += "<img onclick='OpenInNewTab(\"" + data.Medicaments[i].KispiUrl.replace("&amp;", "&") + "\")' src='" + imgUrl + "'/>Kinderdosierung";
+                                    //cdsCheckHtml += "<a target='_blank' href='" + data.Medicaments[i].KispiUrl.replace("&amp;", "&") + "'/><img  src='" + imgUrl + "'/>Kispi</a>";
+
+
+
+                                    SetCdsCheck(data.Medicaments[i].ProductNumber, cdsCheckHtml);
+                                }
+
+                            },
+                            error: function(xhr, status, error) {
+                                alert(error);
+                            }
+                        });
+                    }
+                }
+
+                function SetCdsCheck(productNumber, htmlContent) {
+                    $(".CdsCheck." + productNumber).html(htmlContent);
+                }
+
+
+
+
+                function ShowPatientVekaDetail(cardNumber) {
+                    $.ajax({
+                        url: '/Webapplications/MafIntern/Edit/GetPatientVekaView/' + cardNumber,
+                        cache: false,
+                        success: function(html) {
+
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+
+                }
+
+                dialogVeka = $("#PatientVekaDialog").dialog({
+                    autoOpen: false,
+                    height: 450,
+                    width: 850,
+                    modal: true,
+                    close: function() {
+
+                    }
+                });
+
+                function ShowPatientInsuranceDetail() {
+                    var cardNumber = $('.cardNumber').val();
+                    $.ajax({
+                        url: '/Webapplications/MafIntern/Edit/GetPatientVekaView/' + cardNumber,
+                        cache: false,
+                        success: function(html) {
+                            $("#PatientVeka").html(html);
+                            $('#PatientVekaDialog').dialog('option', 'title', $("#PatientTitle").html());
+                            dialogVeka.dialog("open");
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+
+                }
+            </script>
+            <script type="text/javascript">
+                function PreparePrint() {}
+
+                function MedicationScanned(barcode) {
+
+                    $("#hiddenBarcodeToMerge").val(barcode);
+                    PostWithoutValidation('Merge');
+                }
+
+                function MedicationTypeChanged(dropDown) {
+                    PostWithoutValidation(dropDown.val());
+
+                }
+
+                function PostWithoutValidation(command) {
+                    ChangeCommand(command);
+                    PostForm();
+
+                }
+
+                function ChangeCommand(command) {
+                    //$("#messagePanel").remove();
+                    $('.commandName').val(command);
+                }
+
+                function ChangeCommandAndPost(command) {
+                    ChangeCommand(command);
+                    if (command === 'Save' || command === 'Send') {
+                        PostForm();
+                    } else {
+                        PostForm();
+                    }
+
+
+                }
+
+                function PostWithIFrameIntegrationParent(command) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Webapplications/MafIntern/Edit/GetCode',
+                        data: $("#mainForm").serialize(),
+                        success: function(codeResult) {
+                            PostWithIFrameIntegrationParentSuccess(codeResult, command);
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+                }
+
+                function PostWithIFrameIntegrationParentSuccess(codeResult, actionName) {
+
+                    if (codeResult.success == true) {
+                        var editMode = $('#CurrentActiveFormType').data("kendoDropDownList").value();
+                        var mafSendPayload = {
+                            action: actionName,
+                            mode: editMode,
+                            mafData: codeResult.code,
+                            pdfFile: codeResult.pdfFile
+                        };
+                        parent.postMessage(mafSendPayload, '');
+                    } else {
+                        alert(codeResult.errorMessage);
+                    }
+                }
+
+                function PostForm() {
+                    $("#messagePanel").hide();
+                    $("#mainForm")[0].submit();
+                }
+
+                $(function() {
+                    $("form input").keypress(function(e) {
+                        if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+                            $('button[type=submit] .default').click();
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+                });
+
+                $(document).ready(function() {
+
+                    $("#AvailableReceivers").kendoDropDownList();
+                    $("#AvailableReceivers").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 220);
+                    });
+
+                    $("#CurrentActiveFormType").kendoDropDownList();
+
+                    $("#CurrentActiveFormType").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 220);
+                    });
+
+
+
+
+                    SetMedicamentsSortAndAlternateStyles();
+                    kendo.culture("de-CH");
+                    AddMedicationMedicamentHandlers($("#Medication"));
+                    AddMedicationMedicamentHandlers($("#RenalInsufficiencyCalculatorDialog"));
+
+                    SetAddProductCombobox();
+                    SetSelectReceiverCombobox();
+                    $('#MedicationTable').sortable({
+                        axis: "y",
+                        stop: function(event, ui) {
+                            // IE doesn't register the blur when sorting
+                            // so trigger focusout handlers to remove .ui-state-focus
+                            ui.item.triggerHandler("focusout");
+                            SetMedicamentsSortAndAlternateStyles();
+                            if (navigator.userAgent.match(/firefox/i)) {
+                                stop = true;
+                            }
+                        }
+                    });
+
+                    $(function() {
+                        $("#DDProductsToInsert").change(function() {
+
+                            AddMedicament($(this).val(), $(this).data("kendoComboBox").select());
+
+                        });
+                    });
+
+                    $(function() {
+                        $("#DDReceivers").change(function() {
+                            if ($(this).val() === '') {
+                                $('#sendButton').prop('disabled', true);
+                            } else {
+                                $('#sendButton').prop('disabled', false);
+                            }
+
+                        });
+                    });
+
+
+
+                    AllergiesHasChanged();
+                    SetAllergyDisplay();
+                    GenderChanged(false);
+                    // Already done in Gender Changed
+                    //RefreshAllCdsCheck();
+
+
+                    SetButtonsEnabled();
+                    EnableDisableObjectWithCheckbox();
+
+
+
+
+                });
+
+                function EnableDisableObjectWithCheckbox() {
+                    $(".disableEnableCheckBox").each(function(index) {
+                        DisableFromCheckbox($(this), '.ToBeDisabled');
+                    });
+                }
+
+                function GetIdType() {
+                    return $("#IdType").val();
+                }
+
+                function SetButtonsEnabled() {
+                    var disabled = true;
+                    $("#MedicationTable").find(".medicationMedicament").each(function(index) {
+                        if ($(this).find('.itemToBeDeleted').val() !== 'True') {
+                            disabled = false;
+                        }
+                    });
+                    $(".enableDisableButton").each(function(index) {
+                        $(this).prop('disabled', disabled);
+                    });
+
+                    if ($("#DDReceivers").val() === '') {
+                        disabled = true;
+                    }
+
+                    $(".enableDisableButtonSend").each(function(index) {
+                        $(this).prop('disabled', disabled);
+                    });
+
+                }
+
+                function SetAddProductCombobox() {
+                    $("#DDProductsToInsert").kendoComboBox({
+                        index: 0,
+                        placeholder: 'Produkt suchen',
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        filter: "contains",
+                        template: $("#scriptTemplateAddProduct").html(),
+                        dataSource: {
+                            type: "json",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 50,
+                            transport: {
+                                read: {
+                                    url: "/Webapplications/MafIntern/Edit/SearchProducts",
+                                    data: {
+                                        nonSelectableProductsNr: function() {
+                                            return GetProductNrs();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    $("#DDProductsToInsert").closest(".k-widget").css("width", 300);
+
+
+                }
+
+
+                function SetSelectReceiverCombobox() {
+                    $(".ReceiverDropDown").kendoComboBox({
+                        index: 0,
+                        placeholder: 'Search Receiver',
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        filter: "contains",
+                        //template: $("#scriptTemplateAddProduct").html(),  'GlobalResources.Web.SearchReceiver',
+                        dataSource: {
+                            type: "json",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 50,
+                            transport: {
+                                read: {
+                                    url: "/Webapplications/MafIntern/Edit/SearchReceivers"
+                                }
+                            },
+                            change: function(e) {
+                                $('.hiddenReceiverPtNumber').val('');
+                            }
+                        }
+                    });
+                    $("#DDReceivers").closest(".k-widget").css("width", 300);
+
+
+                }
+
+                function GetProductNrs() {
+                    var prdList = "";
+                    var i = 0;
+                    $("#MedicationTable").find(".inputProductNr").each(function(index) {
+
+                        if ($(this).parent().parent().find('.itemToBeDeleted').val() !== 'True') {
+                            if (i > 0) {
+                                prdList += ";";
+                            }
+                            prdList += $(this).val();
+                            i++;
+                        }
+                    });
+                    return prdList;
+                }
+
+                function GetProductNrsWithSort() {
+                    var prdList = "";
+                    var i = 0;
+                    $("#MedicationTable").find(".inputProductNr").each(function(index) {
+                        var sort = 0
+                        $(this).closest(".medicationMedicament").find(".sort").each(function(index) {
+                            sort = $(this).val();
+                        });
+
+                        if ($(this).parent().parent().find('.itemToBeDeleted').val() !== 'True') {
+                            if (i > 0) {
+                                prdList += ";";
+                            }
+                            prdList += $(this).val() + ',' + sort;
+                            i++;
+                        }
+                    });
+                    return prdList;
+                }
+
+                function GetProductNrsWithRoa() {
+                    var prdRoaList = "";
+                    var i = 0;
+                    $("#MedicationTable").find(".inputProductNr").each(function(index) {
+                        var roa = "";
+                        $(this).closest(".medicationMedicament").find(".roaDropDown").find("option").each(function(index) {
+                            if ($(this).attr("selected") === "selected") {
+                                roa = $(this).attr("value");
+                            }
+                        });
+                        if (roa === "") {
+                            roa = $(".hiddenROA").val();
+                        }
+                        if ($(this).parent().parent().find('.itemToBeDeleted').val() !== 'True') {
+                            if (i > 0) {
+                                prdRoaList += ";";
+                            }
+                            prdRoaList += $(this).val() + ',' + roa;
+                            i++;
+                        }
+                    });
+                    return prdRoaList;
+                }
+
+
+
+                function ResetTakingReasonId(takingReasonTextBox) {
+                    var takingReasonId = "";
+                    if (takingReasonTextBox.val() === takingReasonTextBox.parent().find('.takingReasonSave').val()) {
+                        takingReasonId = takingReasonTextBox.parent().find('.takingReasonIdSave').val();
+                    }
+                    takingReasonTextBox.parent().find('.hiddenTakingReasonId').val(takingReasonId);
+
+
+                }
+
+                function AutoMedicationChanged(checkbox) {
+                    if (checkbox.is(':checked')) {
+                        checkbox.closest(".medicationMedicament").find(".prescribedBy").addClass("neverDisplay");
+                        checkbox.parent().find(".autoMedicationHidden").val("True");
+                    } else {
+                        checkbox.closest(".medicationMedicament").find(".prescribedBy").removeClass("neverDisplay");
+                        checkbox.parent().find(".autoMedicationHidden").val("False");
+                    }
+                }
+
+                function PharmacodeChanged(dropDown) {
+                    var div = dropDown.closest(".medicationMedicament");
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        url: '/Webapplications/MafIntern/Edit/GetArticle/' + dropDown.val(),
+                        data: null,
+                        success: function(data) {
+                            div.find(".hiddenPrice").val(data.Price);
+
+                            div.find(".hiddenSl").val(data.IsInSl);
+                            div.find(".spanSlOgCode").text(data.SlOgCode);
+                            div.find(".hiddenSlOgCode").text(data.SlOgCode);
+                            div.find(".hiddenSlFranchise").val(data.SlFranchise);
+
+                            if (data.SlFranchise.length === 0) {
+                                div.find(".spanPrice").text('');
+                            } else {
+                                div.find(".spanPrice").text(' / ' + data.PriceString);
+                            }
+
+
+                            if (data.SlFranchise.length === 0) {
+                                div.find(".spanSlFranchise").text('');
+                            } else {
+                                div.find(".spanSlFranchise").text(' (' + data.SlFranchise + ')');
+                            }
+                        },
+                        error: function(data) {
+
+                        },
+                        processData: false,
+                        async: false
+                    });
+                }
+
+                function AddMedicationMedicamentHandlers(parent) {
+
+
+                    parent.find(".advancedPosologyCheckBox").each(function(index) {
+                        SetAdvancedPosology($(this));
+                    });
+
+
+                    parent.find(".datePicker").kendoDatePicker({
+                        format: "dd.MM.yyyy"
+                    });
+
+
+                    parent.find(".datePickerBirthDate").kendoDatePicker({
+                        format: "dd.MM.yyyy",
+                        max: "01.04.2017 00:00:00",
+                        min: "01.04.1897 00:00:00"
+                    });
+                    parent.find(".datePickerFirstDayLastMenstruation").kendoDatePicker({
+                        format: "dd.MM.yyyy",
+                        max: "01.04.2017 00:00:00",
+                        min: "01.06.2016 00:00:00"
+                    });
+
+
+
+
+                    parent.find(".articleKendoLikeDropDown").kendoDropDownList({
+                        template: $("#scriptTemplateArticle").html(),
+                        valuetemplate: $("#scriptTemplateArticle").html(),
+                        headertemplate: $("#scriptTemplateArticle").html()
+                    });
+
+
+
+                    parent.find(".articleKendoLikeDropDown").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 160);
+                    });
+
+
+
+                    parent.find(".kendoLikeDropDown").kendoDropDownList();
+
+                    parent.find(".kendoLikeDropDown").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 140);
+                    });
+
+                    parent.find(".kendoLikeDropDownMedium").kendoDropDownList();
+
+                    parent.find(".kendoLikeDropDownMedium").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 90);
+                    });
+
+                    parent.find(".kendoLikeDropDownBig").kendoDropDownList();
+
+                    parent.find(".kendoLikeDropDownBig").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 200);
+                    });
+
+                    parent.find(".kendoLikeDropDownSmall").kendoDropDownList();
+
+                    parent.find(".kendoLikeDropDownSmall").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 80);
+                    });
+
+                    parent.find(".kendoLikeDropDownTiny").kendoDropDownList();
+
+                    parent.find(".kendoLikeDropDownTiny").each(function(index) {
+                        $(this).closest(".k-widget").css("width", 50);
+                    });
+
+
+                    parent.find(".prescribedByDropDown").kendoComboBox({
+                        index: 0,
+                        placeholder: 'Arzt suchen',
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        filter: "contains",
+                        template: $("#scriptTemplateAddDoctor").html(),
+                        dataSource: {
+                            type: "json",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 50,
+                            transport: {
+                                read: {
+                                    url: "/Webapplications/MafIntern/Edit/SearchDoctors"
+                                }
+                            }
+                        }
+                    });
+
+                    parent.find(".reproductionDropDown").kendoDropDownList({
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        dataSource: {
+                            type: "json",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 50,
+                            transport: {
+                                read: {
+                                    url: "/Webapplications/MafIntern/Cds/GetReproductionTypes",
+                                    cache: false,
+                                    data: {
+                                        gender: function() {
+                                            return GetGender();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    parent.find(".prescribedByDropDown").each(function(index) {
+                        $(this).closest(".k-widget").css("width", "95%");
+                    });
+
+                    parent.find(".numericTextBox").kendoNumericTextBox({
+                        name: "custom",
+                        format: "",
+                        min: 0
+                    });
+                    parent.find(".numericTextBox100").kendoNumericTextBox({
+                        name: "custom",
+                        format: "",
+                        min: 0,
+                        spin: onDoseSpin
+                    });
+                    parent.find(".numericTextBox25").kendoNumericTextBox({
+                        name: "custom",
+                        format: "",
+                        min: 0,
+                        step: "0.25",
+                        spin: onDoseSpin
+                    });
+                    parent.find(".numericTextBox33").kendoNumericTextBox({
+                        name: "custom",
+                        format: "",
+                        min: 0,
+                        step: "0.33",
+                        spin: onDoseSpin
+                    });
+
+                    parent.find(".numericTextBox50").kendoNumericTextBox({
+                        name: "custom",
+                        format: "",
+                        min: 0,
+                        step: "0.50",
+                        spin: onDoseSpin
+                    });
+
+
+                }
+
+                function objToString(obj) {
+                    var str = '';
+                    for (var p in obj) {
+                        if (obj.hasOwnProperty(p)) {
+                            str += p + '::' + obj[p] + '\n';
+                        }
+                    }
+                    return str;
+                }
+
+
+                function SetMedicamentsSortAndAlternateStyles() {
+                    var cpt = 0;
+                    var sort = 1;
+                    $("#MedicationTable").find(".medicationMedicament").each(function(index) {
+                        var sortInput = $(this).find(".sort");
+                        sortInput.val(sort);
+                        if ($(this).find('.itemToBeDeleted').val() !== 'True') {
+                            $(this).removeClass("alternateMedicationActiveFormItem");
+                            if (cpt % 2 === 0) {
+                                $(this).addClass("alternateMedicationActiveFormItem");
+                            }
+                            cpt++;
+                        }
+                        sort++;
+                    });
+                    $("#MedicationTable").find(".selectSimilarProduct").each(function(index) {
+                        $(this).html('');
+                    });
+                    $("#MedicationTable").find(".replacementProductNr").each(function(index) {
+                        $(this).val();
+                    });
+
+
+
+                }
+
+                function ShowAdditionalInfos(medicamentTable) {
+                    medicamentTable.find(".additionnalRow").each(function(index) {
+                        $(this).show();
+                    });
+
+                    medicamentTable.find(".btnShowAdditionalInfos").each(function(index) {
+
+                        $(this).hide();
+                    });
+
+                    medicamentTable.find(".btnHideAdditionalInfos").each(function(index) {
+                        $(this).show();
+                    });
+
+                }
+
+                function HideAdditionalInfos(medicamentTable) {
+                    medicamentTable.find(".additionnalRow").each(function(index) {
+                        $(this).hide();
+                    });
+                    medicamentTable.find(".btnShowAdditionalInfos").each(function(index) {
+                        $(this).show();
+                    });
+
+                    medicamentTable.find(".btnHideAdditionalInfos").each(function(index) {
+                        $(this).hide();
+                    });
+
+                }
+
+                function DeleteItem(itemTBody) {
+
+                    itemTBody.hide();
+                    itemTBody.find(".itemToBeDeleted").val('True');
+                    SetMedicamentsSortAndAlternateStyles();
+                    SetButtonsEnabled();
+                    RefreshAllCdsCheck();
+
+                }
+
+                function AddMedicament(productNr) {
+                    if (productNr.match(/^[0-9]+$/)) {
+                        AddMedicationMedicament(productNr);
+                    }
+                }
+
+                function AddMedicationMedicament(productNr) {
+                    var doctorName = "";
+                    var found = false;
+                    $("#waitImg").show();
+                    $("input.prescribedByDropDown").each(function(index) {
+                        if (!found) {
+                            var val = $(this).val();
+                            if (isNaN(val)) {
+                                if (doctorName === "") {
+                                    doctorName = val;
+                                }
+                            } else {
+                                doctorName = val;
+                                found = true;
+                            }
+                        }
+                    });
+                    var baseUrl = "/GetMedicationMedicamentModelEditor?productNr=" + productNr + '&';
+                    if (productNr === -100) {
+                        baseUrl = "/GetFreeTextEditor?"
+                    }
+
+                    baseUrl += 'type=MedicationPlan&doctor=' + doctorName;
+
+                    $.ajax({
+                        url: '/Webapplications/MafIntern/Edit/' + baseUrl,
+                        cache: false,
+                        success: function(html) {
+                            var DDProducts = $("#DDProductsToInsert").data("kendoComboBox");
+                            DDProducts.select(0);
+                            DDProducts.dataSource.read({
+                                value: ""
+                            })
+                            AddMedicamentInGui(html);
+                            $("#waitImg").hide();
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+
+                    });
+                }
+
+                function prepareHtml(html, itemNr, baseName) {
+                    var div = $('<div/>').append(html);
+                    div.find("[id]").each(function() {
+                        if (!($(this).hasClass("doNotChangeId"))) {
+                            $(this).attr("id", function(index, attr) {
+                                return baseName.replace(".", "_").replace("[", "_").replace("]", "_") + "_" + itemNr + "__" + attr;
+                            });
+                            $(this).attr("name", function(index, attr) {
+                                if (attr !== 'documents') {
+                                    return baseName + "[" + itemNr + "]." + attr;
+                                }
+                            });
+                        }
+                    });
+                    div.children().first().attr("id", baseName + "tit__" + itemNr);
+                    div.children().last().attr("id", baseName + "cont__" + itemNr);
+
+                    return div.html();
+                }
+
+
+
+                function OpenInNewTab(url) {
+
+                    var win = window.open(url, '_blank');
+                    win.focus();
+                }
+
+                function DisableFromCheckbox(checkbox, selectorToBeDisabledField) {
+                    checkbox.parent().parent().find(selectorToBeDisabledField).each(function(index) {
+                        if (checkbox.is(':checked')) {
+                            $(this).removeAttr("disabled", "disabled");
+                        } else {
+                            $(this).attr("disabled", "disabled");
+                        }
+                    });
+
+                }
+
+                function CheckBoxChanged(checkbox, selectorHiddenField) {
+                    if (checkbox.is(':checked')) {
+                        checkbox.parent().find(selectorHiddenField).val("True");
+                    } else {
+                        checkbox.parent().find(selectorHiddenField).val("False");
+                    }
+                }
+
+
+
+                function AddMedicamentInGui(html) {
+                    var nextItemNr = +$("#NextMedicationMedicamentNr").text();
+                    var baseName = "MedicationModel.Medicaments";
+                    $("#MedicationTable").prepend(prepareHtml(html, nextItemNr, baseName));
+                    $("#NextMedicationMedicamentNr").text(nextItemNr + 1);
+                    SetMedicamentsSortAndAlternateStyles();
+                    SetButtonsEnabled();
+                    AddMedicationMedicamentHandlers($(".medicationMedicament").first());
+                    $(".medicationMedicament").find(".btnHideAdditionalInfos").click();
+                    $(".medicationMedicament").first().find(".btnShowAdditionalInfos").click();
+
+                    RefreshAllCdsCheck();
+
+                }
+
+
+                dialogSimilarProduct = $("#ChooseSimilarProductDialog").dialog({
+                    autoOpen: false,
+                    height: 250,
+                    width: 450,
+                    modal: true,
+                    close: function() {
+
+                    }
+                });
+
+                dialogAdvancedPosology = $("#AdvancedPosologyDialog").dialog({
+                    autoOpen: false,
+                    height: 450,
+                    width: 600,
+                    modal: true,
+                    close: function() {
+
+                    }
+                });
+                currentReplacementProductNr = null;
+
+                function ShowSimilarProducts(btnImage, productNr) {
+                    currentReplacementProductNr = btnImage.closest(".medicationMedicament").find(".replacementProductNr").val(productNr);
+                    currentBtnImage = btnImage;
+                    $.ajax({
+                        url: '/Webapplications/MafIntern/Edit/GetChooseSimilarProductEditor?productNr=' + productNr + '&nonSelectableProductsNr=' + GetProductNrs(),
+                        cache: false,
+                        success: function(html) {
+                            $("#ChooseSimilarProduct").html(html);
+                            dialogSimilarProduct.dialog("open");
+
+                        },
+                        error: function(xhr, status, error) {
+
+                            alert(error);
+                        }
+                    });
+                }
+
+                function ShowAdvancedPosologyDialog(divWithContent) {
+                    $("#AdvancedPosologyDialog").html(divWithContent.html());
+                    dialogAdvancedPosology.dialog("open");
+                }
+
+                function AddSimilarProduct(productNr) {
+                    currentReplacementProductNr.val(productNr);
+                    if (productNr !== '-1') {
+                        $("#waitImg").show();
+                        $.ajax({
+                            type: "POST",
+                            url: '/Webapplications/MafIntern/Edit/GetSimilarProduct',
+                            data: $("#mainForm").serialize(),
+                            success: function(html) {
+                                AddMedicamentInGui(html);
+                                currentBtnImage.hide();
+                                currentBtnImage.next().show();
+                                currentReplacementProductNr.val('');
+                                $("#ChooseSimilarProduct").html('');
+                                currentReplacementProductNr = null;
+                                currentBtnImage = null;
+                                dialogSimilarProduct.dialog("close");
+                                $("#waitImg").hide();
+                            },
+                            error: function(data) {
+                                alert(data);
+                                currentReplacementProductNr = null;
+                                currentBtnImage = null;
+                                dialogSimilarProduct.dialog("close");
+                                $("#waitImg").hide();
+                            }
+                        });
+                    }
+                }
+
+
+
+
+
+
+
+                function SetDate(selector) {
+                    $.ajax({
+                        url: '/Webapplications/MafIntern/Edit/GetDate/',
+                        cache: false,
+                        success: function(date) {
+                            $(selector).val(date);
+                        },
+                        error: function(result, status, error) {
+                            alert(error);
+                        }
+                    });
+                }
+
+                function UpdatePatientLastUpdateDate() {
+                    SetDate(".patientLastUpdateDate");
+                }
+
+                function CardNumberChanged(keyCode) {
+
+                    UpdatePatientLastUpdateDate();
+
+                    var cardNumber = $(".cardNumber").val();
+
+                    if (cardNumber.length > 0 && !isNaN(cardNumber)) {
+                        $(".cardNumberInfo").show();
+                        if (keyCode === 13) {
+                            ShowPatientInsuranceDetail();
+                        }
+                    } else {
+                        $(".cardNumberInfo").hide();
+                    }
+                }
+
+                function onDoseSpin() {
+
+                    //alert(this);
+                    //MedicamentValueChanged(txtDose.val(), txtDose.closest('td').find('.hiddenDose'), true);
+                }
+
+
+                function DoseChanged(txtDose) {
+                    MedicamentValueChanged(txtDose.val(), txtDose.closest('td').find('.hiddenDose'), true);
+                }
+
+
+                function UnitChanged(doseUnitDropDown) {
+                    MedicamentValueChanged(doseUnitDropDown.val(), doseUnitDropDown.closest('td').find('.hiddenDoseUnit'), true)
+                }
+
+                function MedicamentValueChanged(value, hiddenItem, isCdsRelevant) {
+                    hiddenItem.val(value);
+
+                    if (isCdsRelevant)
+                        //RefreshCdsCheckByControl(hiddenItem);
+                        RefreshAllCdsCheck();
+
+                }
+
+                function GetGender() {
+
+                    return $('#GenderDropDown').val();
+                }
+
+                function GetCompetitiveAthlete() {
+                    return $('#CompetitiveAthleteDropDown').val();
+                }
+
+                function SetAdvancedPosology(checkBox) {
+
+
+                    checkBox.closest('tbody').find('.tdSimplePosology').each(function(index) {
+                        //var input = $(this)
+
+                        if (checkBox.is(':checked'))
+                            $(this).hide();
+                        else
+                            $(this).show();
+                    });
+
+                    checkBox.closest('tbody').find('.tdAdvancedPosology').each(function(index) {
+                        //var input = $(this).children().first();
+
+                        if (checkBox.is(':checked')) {
+                            $(this).show();
+
+                            if (checkBox.closest('tbody').find('.txtApplicationInstructions').val() === "") {
+                                $(this).html('Bitte das Feld Anwendungsinstruktion ausf&#252;llen');
+                            } else {
+                                $(this).html('siehe Anleitung');
+                            }
+
+                            //
+                        } else
+                            $(this).hide();
+                    });
+                }
+            </script>
+            <script id="scriptTemplateAddProduct" type="text/x-kendo-template">
+                <span style="display:inline-block;width:17px" title="${ data.Tooltip }">
+                # if (data.IsInCurrentFavoriteList) { #
+                <img alt="Favorite" src='/Webapplications/MafIntern/Content/Images/Icons/favorite_small.png' />
+                # } #
+            </span> ${ data.Text }
+            </script>
+            <script id="scriptTemplateAddDoctor" type="text/x-kendo-template">
+                ${ data.Text }
+            </script>
+
+            <script id="scriptTemplateArticle" type="text/x-kendo-template">
+                <span style="display:inline-block;width:17px" title="${ data.Tooltip }">
+                # if (data.IsInCurrentFavoriteList) { #
+                <img alt="Favorite" src='/Webapplications/MafIntern/Content/Images/Icons/favorite_small.png' />
+                # } #
+            </span> ${ data.Text }
+            </script>
+
+
+
+
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="ScanMafDialog" aria-labelledby="ui-id-1">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">Scan</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="ScanMafDialog" class="ui-dialog-content ui-widget-content">
+            <div id="ScanMafDialogContent">
+
+            </div>
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="RenalInsufficiencyCalculatorDialog" aria-labelledby="ui-id-2">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-2" class="ui-dialog-title">Niereninsuffizienzrechner</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="RenalInsufficiencyCalculatorDialog" class="ui-dialog-content ui-widget-content">
+
+            <table style="border-collapse:collapse; border-spacing:0px;margin:0;width:100%">
+                <tbody>
+                    <tr style="padding:0px;">
+                        <td>
+                            Gewicht
+                        </td>
+                        <td colspan="2">
+                            <input class="weightInDialog" style="width:30px" onkeyup="CalculateCreatininClearance();" type="text"> kg
+                        </td>
+                    </tr>
+                    <tr style="padding:0px;">
+                        <td>
+                            Geburtsdatum
+                        </td>
+                        <td>
+                            <span style="width: 120px;" class="k-widget k-datepicker k-header datePickerBirthDate"><span class="k-picker-wrap k-state-default"><input class="datePickerBirthDate k-input" style="width: 100%;" id="birthDateInDialog" onblur="$('#hiddenBDInDialog').val($(this).val()); CalculateCreatininClearance(); UpdateAgeInDialog()" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="birthDateInDialog_dateview" aria-disabled="false" aria-readonly="false" type="text"><span unselectable="on" class="k-select" role="button" aria-controls="birthDateInDialog_dateview"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>
+                            </span>
+                            </span>
+                            <input id="hiddenBDInDialog" value="" type="hidden">
+                        </td>
+                        <td>
+                            <span id="ageInDialog"></span>
+                        </td>
+                    </tr>
+                    <tr style="padding:0px;">
+                        <td>
+                            Geschlecht
+                        </td>
+                        <td colspan="2">
+                            <span style="width: 90px;" title="" class="k-widget k-dropdown k-header kendoLikeDropDownMedium" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="GenderDropDownInDialog_listbox" aria-disabled="false"
+                                aria-readonly="false" aria-busy="false" aria-activedescendant="1530414c-4d97-4f61-8d0d-8db165616933"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">?</span>
+                            <span
+                                unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span>
+                                </span><select class="kendoLikeDropDownMedium" id="GenderDropDownInDialog" name="MedicationModel.Patient.GenderDropDownInDialog" onchange="CalculateCreatininClearance();" data-role="dropdownlist" style="display: none;"><option value="Unknown" selected="selected">?</option><option value="Male">männlich</option><option value="Female">weiblich</option></select></span>
+                        </td>
+                    </tr>
+
+                    <tr style="padding:0px;">
+                        <td rowspan="2">
+                            Kreatinin
+                        </td>
+                        <td rowspan="2" style="padding:0px;">
+                            <input class="creatininTextBox" style="width:50px" onkeyup="CreatininValueChanged($(this).val());" type="text"> μmol/l
+                        </td>
+                        <td style="padding:0px;display:none" colspan="2">
+                            <input checked="checked" class="radioCreatininUnit" id="MedicationModel_Patient_CreatininUnit" name="MedicationModel.Patient.CreatininUnit" onclick="CreatininUnitChanged()" value="MicroMolL" type="radio">μmol/l
+                        </td>
+                    </tr>
+                    <tr style="padding:0px;display:none">
+                        <td style="padding:0px;">
+                            <input class="radioCreatininUnit" id="MedicationModel_Patient_CreatininUnit" name="MedicationModel.Patient.CreatininUnit" onclick="CreatininUnitChanged()" value="MgDl" type="radio"> mg/dl
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="width:10px">
+                            &nbsp;
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Creatinin Clearance
+                        </td>
+                        <td>
+                            <input id="CreatininClearance" class="creatininClearanceTextBox" style="width:50px" onkeyup="SetRenalInsufficiencyLevel($(this).val())" type="text"> ml/min
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="width:10px">
+                            &nbsp;
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Niereninsuffizienz
+                        </td>
+                        <td colspan="2">
+                            <span id="RenalInsufficiencyLevel">
+
+
+                    </span>
+                            <input id="RenalInsufficiencyLevelId" type="hidden">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" height="5px">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:right;border-top:1px solid black">
+                            <button style="margin-top:10px;" type="submit" name="command" onclick="TakeValues(); return false;">Daten übernehmen</button>
+                            <button style="margin-top:10px;" type="submit" name="command" onclick="renalInsufficiencyCalculatorDialog.dialog('close'); return false;">Cancel</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="AllergiesDialog" aria-labelledby="ui-id-3">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-3" class="ui-dialog-title">Allergie(n)</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="AllergiesDialog" class="ui-dialog-content ui-widget-content">
+
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="CompleteCdsCheckPopup" aria-labelledby="ui-id-4">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-4" class="ui-dialog-title">Cds Report</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="CompleteCdsCheckPopup" class="ui-dialog-content ui-widget-content">
+            <div id="CompleteCdsCheckPopupContent">
+
+
+            </div>
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="PatientVekaDialog" aria-labelledby="ui-id-5">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-5" class="ui-dialog-title">Patient</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="PatientVekaDialog" class="ui-dialog-content ui-widget-content">
+            <form>
+                <div id="PatientVeka">
+
+                </div>
+            </form>
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="ChooseSimilarProductDialog" aria-labelledby="ui-id-6">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-6" class="ui-dialog-title">Bitte Produkt wählen</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="ChooseSimilarProductDialog" class="ui-dialog-content ui-widget-content">
+            <form>
+                <div id="ChooseSimilarProduct">
+
+                </div>
+            </form>
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable" style="display: none; position: absolute;" tabindex="-1" role="dialog" aria-describedby="AdvancedPosologyDialog" aria-labelledby="ui-id-7">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-7" class="ui-dialog-title">AdvancedPosology</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div>
+        <div
+            id="AdvancedPosologyDialog" class="ui-dialog-content ui-widget-content">
+
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+    </div>
+    <div class="footerRow">
+        <div class="footerLeft">
+            <span class="copyright">Copyright © HCI Solutions 2015</span><a class="conditionsOfUse" href="https://webex.hcisolutions.ch/Webapplications/MafIntern/Home/ConditionsOfUse">Nutzungsbedingungen</a>
+        </div>
+        <div class="footerRight">
+            DEV&nbsp;&nbsp;1.0.6268.25722
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#GuiModesDropDown").kendoDropDownList();
+        });
+    </script>
+
+
+    <div class="k-list-container k-popup k-group k-reset" id="CurrentActiveFormType-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="CurrentActiveFormType_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="ec998ccb-28c3-4296-813a-b3d2f9fd4617">MedicationPlan</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">E-Rezept</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">Polymedikations-Check</li>
+            </ul>
+        </div>
+    </div>
+    <div aria-hidden="true" class="k-calendar-container k-popup k-group k-reset" id="BirthDate_dateview" data-role="popup" style="display: none; position: absolute;"></div>
+    <div aria-hidden="true" class="k-calendar-container k-popup k-group k-reset" id="FirstDayLastMenstruation_dateview" data-role="popup" style="display: none; position: absolute;"></div>
+    <div class="k-list-container k-popup k-group k-reset" id="MedicationModel_Patient_Language-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="MedicationModel_Patient_Language_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="90d1513d-5496-4bf3-bd7d-1f3bcd44b58b">Deutsch</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">Français</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">Italiano</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="3">Turkish</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="4">Albanian</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="5">Spanish</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="6">Portuguese</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="7">Serbian</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="GenderDropDown-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="GenderDropDown_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="29c38f84-232f-49e9-8a6d-61a7e885face">?</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">männlich</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">weiblich</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="RenalInsufficiencyDropDown-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="RenalInsufficiencyDropDown_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="0">?</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="1" id="2f510353-863b-4515-9d55-725470160022">keine</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">leicht (Clcr 60-90 ml/min)</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="3">mittelschwer (Clcr 30-60 ml/min)</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="4">schwer (Clcr 15-30 ml/min)</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="5">terminal (Clcr &lt;15 ml/min)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="LiverInsufficiencyDropDown-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="LiverInsufficiencyDropDown_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="0">?</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="1" id="3629c352-608c-4ca7-b546-2ab67b339edf">keine</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">leichte Child-Pugh A</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="3">mittelschwere Child-Pugh B</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="4">schwere Child-Pugh C</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="CompetitiveAthleteDropDown-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="CompetitiveAthleteDropDown_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="0">?</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">ja</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="2" id="5f53adc7-63d0-4d7a-923d-a2701bafdbdb">nein</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="HasAllergiesDropDown-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="HasAllergiesDropDown_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="0">?</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">ja</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="2" id="88859dfb-0bbd-4fcf-a5c9-7576297ae795">nein</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="MedicationModel_Patient_WeeksOfGestation-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="MedicationModel_Patient_WeeksOfGestation_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="4a96e40e-66a3-44fb-90fc-248c854b9223">-</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">36</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">35</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="3">34</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="4">33</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="5">32</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="6">31</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="7">30</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="8">29</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="9">28</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="10">27</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="11">26</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="12">25</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="13">24</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="14">23</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="15">22</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="MedicationModel_Patient_DaysOfGestation-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="MedicationModel_Patient_DaysOfGestation_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="66bcc315-3b7d-432d-a752-8fc93d4fc7e5">-</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">0</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">1</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="3">2</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="4">3</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="5">4</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="6">5</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="7">6</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="ReproductionDropDown-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="ReproductionDropDown_listbox" aria-live="off" data-role="staticlist" role="listbox"></ul>
+        </div>
+    </div>
+    <div aria-hidden="true" class="k-calendar-container k-popup k-group k-reset" id="birthDateInDialog_dateview" data-role="popup" style="display: none; position: absolute;"></div>
+    <div class="k-list-container k-popup k-group k-reset" id="GenderDropDownInDialog-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="GenderDropDownInDialog_listbox" aria-live="off" data-role="staticlist" role="listbox">
+                <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-selected k-state-focused" aria-selected="true" data-offset-index="0" id="1530414c-4d97-4f61-8d0d-8db165616933">?</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="1">männlich</li>
+                <li tabindex="-1" role="option" unselectable="on" class="k-item" data-offset-index="2">weiblich</li>
+            </ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="DDProductsToInsert-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="DDProductsToInsert_listbox" aria-live="polite" data-role="staticlist" role="listbox"></ul>
+        </div>
+    </div>
+    <div class="k-list-container k-popup k-group k-reset" id="DDReceivers-list" data-role="popup" style="display: none; position: absolute;">
+        <div class="k-group-header" style="display:none"></div>
+        <div class="k-list-scroller" unselectable="on">
+            <ul unselectable="on" class="k-list k-reset" tabindex="-1" aria-hidden="true" id="DDReceivers_listbox" aria-live="polite" data-role="staticlist" role="listbox"></ul>
+        </div>
+    </div>
+</body>
+
+</html>
