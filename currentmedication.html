@@ -97,7 +97,7 @@
         </ul>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">Aktuelle Medikation</h1>
+        <h1 class="page-header">Aktuelle Medikation im EPD</h1>
 
         <!-- Table for the current medication. Content is loaded dynamically based on informations stored in the EHR -->
         <div class="table-responsive">
@@ -135,10 +135,50 @@
 
         <div class="adjustButtons">
           <button class="changeMedication" onclick="">Medikation ändern</button>
-          <button class="saveChanges" onclick="">Änderungen übernehmen</button>
         </div>
 
       </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Neue Medikation</h1>
+
+        <!-- Table for the current medication. Content is loaded dynamically based on informations stored in the EHR -->
+        <div class="table-responsive">
+          <table class="table table-current-medication">
+            <thead>
+              <tr>
+                <th>Medikament</th>
+                <th>Schema</th>
+                <th>Einheit</th>
+                <th>Art der Medikation</th>
+                <th>Von bis und mit</th>
+                <th>Anwendungsinstruktion</th>
+                <th>Anwendungsgrund</th>
+                <th>Verordnet durch</th>
+                <th>Verordnungsdatum</th>
+                <th>Kommentar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Antibiotikum</td>
+                <td>1-1-1-1</td>
+                <td>Stk</td>
+                <td>täglich</td>
+                <td>27.03.2017 - 31.12.2017</td>
+                <td>nach dem Essen</td>
+                <td>Bluthochdruck</td>
+                <td>Dr. Wenger</td>
+                <td>27.03.2017</td>
+                <td>No Comment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
     </div>
   </div>
 
