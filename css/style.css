@@ -183,17 +183,25 @@ textarea {
 .cpContainer {
   width: auto;
   height: 100%;
-  clip: auto;
+/*  clip: auto;
   position: absolute;
-  overflow: hidden;
+  overflow: hidden;*/
 }
-/* To make the list of patients in choosepatient.html scrollable*/
+.cpLeftCol {
+  width: 25%;
+  height: 100%;
+}
+.cpRightCol {
+  width: 75%;
+  height: 100%;
+}
+/* To make the list of patients in choosepatient.html scrollable
 .patientList nav, .patientList ul {
   height:auto;
   width:25%;
   overflow:hidden;
   overflow-y:scroll;
-}
+}*/
 /*
 nav ul{height:200px; width:18%;}
 nav ul{overflow:hidden; overflow-y:scroll;}
