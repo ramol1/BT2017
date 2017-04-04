@@ -178,3 +178,23 @@ textarea {
     display: inline-block;
     border-radius: 50%;
 }
+
+/*Start of css used specifically in choosepatinet.html*/
+.cpContainer {
+  width: auto;
+  height: 100%;
+  clip: auto;
+  position: absolute;
+  overflow: hidden;
+}
+/* To make the list of patients in choosepatient.html scrollable*/
+.patientList nav, .patientList ul {
+  height:auto;
+  width:25%;
+  overflow:hidden;
+  overflow-y:scroll;
+}
+/*
+nav ul{height:200px; width:18%;}
+nav ul{overflow:hidden; overflow-y:scroll;}
+*/
