@@ -133,6 +133,12 @@ body {
   border-spacing: 0 !important;
 }
 
+.table-adjust-medication th {
+  text-align: center;
+  height: 58px;
+  vertical-align: middle !important;
+}
+
 .table-adjust-medication td {
   margin: 0;
   padding: 0;
@@ -155,6 +161,10 @@ textarea {
   padding-left: 5px;
 }
 
+
+.collapsed-table tr {
+  display: none;
+}
 
 /*
  * Placeholder dashboard ideas
