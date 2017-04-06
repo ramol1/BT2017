@@ -161,10 +161,29 @@ textarea {
   padding-left: 5px;
 }
 
-
-.collapsed-table tr {
-  display: none;
+/*
+* Content of Medication history page
+*/
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #eee;
+    border: solid 1px #c3c3c3;
 }
+
+#flip {
+  cursor: pointer;
+}
+
+#panel {
+    display: none;
+    padding: 0;
+}
+
+#panel .table {
+  margin-bottom: 0;
+}
+
 
 /*
  * Placeholder dashboard ideas

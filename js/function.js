@@ -8,6 +8,8 @@ function addRow()
 }
 
 /* Function to open and collapse tables */
-$('.collapsed-table > caption').click(function() {
-   $(this).toggleClass('collapsed-table');
-})
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideToggle("slow");
+    });
+});
