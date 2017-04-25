@@ -253,3 +253,22 @@ textarea {
 .cpTextfield{
   margin-bottom: 5%;
 }
+.loginContainer{
+  width: 400px;
+  padding: 3%;
+  text-align: center;
+  margin: 10% auto;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.loginBackground{
+    background-color: #eee;
+}
+.loginStyle{
+  margin-top: 12%;
+  margin-bottom: 8%;
+}
+.loginButton{
+  margin-right: 0px !important;
+  margin-top: 12% !important;
+}
