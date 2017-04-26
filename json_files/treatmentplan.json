@@ -1,0 +1,24 @@
+{
+  "Medikament":
+    {
+      "Name": "Aspirin C Brausetablette",
+      "Wirkstoff": "Acetylsalicylsäure",
+      "Code": "ATC-Code: N02BA51"
+    },
+    "Galenische Form": "Brausetablette",
+    "Dosis": 400,
+    "Einheit": "mg",
+    "Schema": "1-0-1-0",
+    "Einnahmemodus": "Täglich",
+    "Anwendungsinstruktion": "nach dem Essen",
+    "Verabreichungsweg": "o.a.",
+    "Anwendungsgrund": "Bluthochdruck",
+    "Einnahmedatum":
+    {
+      "Einnahme ab": "01.01.2017",
+      "Einnahme bis": "01.01.2018",
+    },
+    "Verordnet durch": "Dr. Wenger",
+    "Verordnungsdatum": "01.01.2017",
+    "Kommentar": "No commentary"
+}
