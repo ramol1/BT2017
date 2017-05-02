@@ -39,4 +39,9 @@ var $rows = $("tbody tr").each(function(index) {
 var myObj = {
     "myrows": myRows
 };
+
+//alerts content of a table as json
 alert(JSON.stringify(myObj));
+
+
+//Code to export json as file
