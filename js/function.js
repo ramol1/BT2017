@@ -21,32 +21,37 @@ $(document).ready(function() {
 
 
 /*Function to iterate content from a table and display as json*/
-var myRows = [];
-var headersText = [];
-var $headers = $("th");
+function tableToJSON(){
+  var myRows = [];
+  var headersText = [];
 
-// Loop through grabbing everything
-var $rows = $("tbody tr").each(function(index) {
+  var $headers = $("th");
+
+  // Loop through grabbing everything
+  var $rows = $("tbody tr").each(function(index) {
     $cells = $(this).find("td");
     myRows[index] = {};
 
     $cells.each(function(cellIndex) {
-        // Set the header text
-        if (headersText[cellIndex] === undefined) {
-            headersText[cellIndex] = $($headers[cellIndex]).text();
-        }
-        // Update the row object with the header/cell combo
-        myRows[index][headersText[cellIndex]] = $(this).text();
+      // Set the header text
+      if(headersText[cellIndex] === undefined) {
+        headersText[cellIndex] = $($headers[cellIndex]).text();
+      }
+      // Update the row object with the header/cell combo
+      myRows[index][headersText[cellIndex]] = $(this).text();
     });
-});
+  });
 
-// Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
-var myObj = {
-    "myrows": myRows
-};
+  // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
+  var myObj = {
+      "myrows": myRows
+  };
 
-//alerts content of a table as json
-alert(JSON.stringify(myObj));
+  //alerts content of a table as json
+  alert(JSON.stringify(myObj));
+}
 
+//calls the conversion of the table to JSON when the "Änderungen übernehmen" button is clicked
+document.getElementById("saveChangesBtn").onclick = tableToJSON;
 
 //Code to export json as file
