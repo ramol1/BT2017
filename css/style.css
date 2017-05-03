@@ -167,9 +167,17 @@ body {
   margin: 0;
   border: 0;
   width: 100%;
+  height: 20px;
   border-radius: 0;
   line-height: 1;
 }
+
+.table-remove-medication th {
+  text-align: center;
+  height: 58px;
+  vertical-align: middle !important;
+}
+
 .tableFont{
   font-size: 10px;
 }
@@ -182,21 +190,25 @@ textarea {
 }
 
 /* Table container from adjustmedication page */
+.tableContainer {
+  overflow: hidden;
+  white-space: nowrap;
+  width: auto;
+}
+
 
 /* beep beep dumb code to float them tables */
 .yeOldeAdjustTable {
-  width: 94%;
+  width: 95%;
 }
 
 .removeTable {
   width: 5%;
 }
 
-
 .yeOldeAdjustTable, .removeTable {
   display: inline-block;
 }
-
 
 /* That weird table for the remove button (Beware ultra cancerous!!) */
 .table-remove-medication {
