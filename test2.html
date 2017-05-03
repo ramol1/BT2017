@@ -96,7 +96,9 @@
 
                 <h2 class="sub-header">Platzhalter Datum Medikationsplan</h2>
 
-                <div class="table-responsive">
+                <div class="tableContainer">
+
+                <div class="table-responsive yeOldeAdjustTable">
                     <table id="myTable" class="table table-adjust-medication">
                         <thead>
                             <tr>
@@ -152,8 +154,8 @@
                 </div>
 
                 <!-- Table to display next to main table -->
-                <div class="table-responsive">
-                    <table id="myTable" class="table table-adjust-medication">
+                <div class="removeTable">
+                    <table id="myRemoveTable" class="table table-remove-medication">
                         <thead>
                             <tr>
                                 <th></th>
@@ -161,14 +163,16 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input type="image" src="images/Eraser-2-icon.png" alt="Button" onclick="deleteRow(this)"></td>
+                                <td class="removeRow"><input type="image" src="images/Eraser-2-icon.png" alt="Button" onclick="deleteRow(this); deleteEraser(this)"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
+              </div>
+
                 <div class="adjustButtons">
-                    <button onclick="addRow()">Neues Medikament hinzufügen</button>
+                    <button onclick="addRow(); addErasers()">Neues Medikament hinzufügen</button>
                     <button class="saveChanges" onclick="">Änderungen übernehmen</button>
                 </div>
 

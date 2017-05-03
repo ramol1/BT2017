@@ -181,6 +181,28 @@ textarea {
   padding-left: 5px;
 }
 
+/* Table container from adjustmedication page */
+
+/* beep beep dumb code to float them tables */
+.yeOldeAdjustTable {
+  width: 94%;
+}
+
+.removeTable {
+  width: 5%;
+}
+
+
+.yeOldeAdjustTable, .removeTable {
+  display: inline-block;
+}
+
+
+/* That weird table for the remove button (Beware ultra cancerous!!) */
+.table-remove-medication {
+
+}
+
 /*
 * Content of Medication history page medicationhistory.html
 */

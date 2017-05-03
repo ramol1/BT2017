@@ -12,6 +12,18 @@ function deleteRow(r) {
     document.getElementById("myTable").deleteRow(i);
 }
 
+// Somehow a copy from the add and remove stuff from above to use it on the remove table weeeeee
+function addErasers(){
+  $('#myRemoveTable tr:last').after('<tr><td class="removeRow"><input type="image" src="images/Eraser-2-icon.png" alt="Button" onclick="deleteRow(this); deleteEraser(this)"></td></tr>');
+}
+
+// Function to remove rows from the remove Table
+function deleteEraser(r) {
+    var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("myRemoveTable").deleteRow(i);
+}
+
+
 // Function to open and collapse tables
 $(document).ready(function() {
     $("#flip").click(function() {
