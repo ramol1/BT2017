@@ -52,8 +52,8 @@
                             <li class="dropdown-header">Nav header</li>
                             <li><a href="#">Separated link</a></li>
                             <li><a href="#">One more separated link</a></li>-->
-                        </ul>
-                    </li>
+                </ul>
+                </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.html">Logout</a></li>
@@ -76,10 +76,10 @@
 
                 <!-- Dynamicaly generated data about patient -->
                 <ul class="patient-info">
-                  <li>Vorname:</li>
-                  <li>Nachname:</li>
-                  <li>Geburtsdatum: </li>
-                  <li>Geschlecht: </li>
+                    <li>Vorname:</li>
+                    <li>Nachname:</li>
+                    <li>Geburtsdatum: </li>
+                    <li>Geschlecht: </li>
                 </ul>
 
 
@@ -96,70 +96,90 @@
 
                 <h2 class="sub-header">Platzhalter Datum Medikationsplan</h2>
 
-                <div class="table-responsive">
-                  <table id="myTable" class="table table-adjust-medication">
-                    <thead>
-                      <tr>
-                        <!--Medikament: name of the medicament-->
-                        <th>Medikament</th>
-                        <!--Wirkstoff: the active ingredient for which the medicament is taken.-->
-                        <th>Wirkstoff</th>
-                        <!--Code: GTIN,Pharmacode,...-->
-                        <th>Code</th>
-                        <!--Galenische Form: if it is a pill, a powder, a fluid,...-->
-                        <th>Galenische Form</th>
-                        <!--Dosis: numeric value of the prescribed dosage, i.e. 500-->
-                        <th>Dosis</th>
-                        <!--Einheit: unit of measurement, i.e. mg, ml, g/ml-->
-                        <th>Einheit</th>
-                        <!--Schema: amount taken morning-midday-evening-night, i.e. 1-0-0-1-->
-                        <th>Schema</th>
-                        <!--Einnahmemodus: i.e. daily-->
-                        <th>Einnahmemodus</th>
-                        <!--Anwendungsinstruktion: if it is taken before meals, with water-->
-                        <th>Anwendungsinstruktion</th>
-                        <!--Verabreichungsweg: where and how it enters the body-->
-                        <th>Verabreichungsweg</th>
-                        <!--Anwendungsgrund: reason for taking the drug.-->
-                        <th>Anwendungsgrund</th>
-                        <!--Einnahme ab: date from which the medicament is taken-->
-                        <th>Einnahme ab</th>
-                        <!--Einnahme bis: date until which the medication is supposed to be taken-->
-                        <th>Einnahme bis</th>
-                        <!--Bemerkungen: annotations like commentary, if a substitute mustn't be used, things to look out for etc.-->
-                        <th>Bemerkungen</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><input type="text" name="medicine" value="" placeholder="Medikament"></td>
-                        <td><input type="text" name="activesubstance" value="" placeholder="Wirkstoff"></td>
-                        <td><input type="text" name="code" value="" placeholder="Code"></td>
-                        <td><input type="text" name="form" value="" placeholder="Galenische Form"></td>
-                        <td><input type="text" name="dose" value="" placeholder="Dosis"></td>
-                        <td><input type="text" name="unit" value="" placeholder="Einheit"></td>
-                        <td><input type="text" name="schema" value="" placeholder="Schema"></td>
-                        <td><input type="text" name="mode" value="" placeholder="Einnahmemodus"></td>
-                        <td><input type="text" name="instruction" value="" placeholder="Anwendungsinstruktion"></td>
-                        <td><input type="text" name="applicationform" value="" placeholder="Verabreichungsweg"></td>
-                        <td><input type="text" name="reason" value="" placeholder="Anwendungsgrund"></td>
-                        <td><input type="text" name="fromdate" value="" placeholder="01.01.2017"></td>
-                        <td><input type="text" name="todate" value="" placeholder="02.01.2017"></td>
-                        <td><input type="text" name="commentary" value="" placeholder="Kommentar"></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="tableContainer">
+
+                <div class="table-responsive yeOldeAdjustTable">
+                    <table id="myTable" class="table table-adjust-medication">
+                        <thead>
+                            <tr>
+                                <!--Medikament: name of the medicament-->
+                                <th>Medikament</th>
+                                <!--Wirkstoff: the active ingredient for which the medicament is taken.-->
+                                <th>Wirkstoff</th>
+                                <!--Code: GTIN,Pharmacode,...-->
+                                <th>Code</th>
+                                <!--Galenische Form: if it is a pill, a powder, a fluid,...-->
+                                <th>Galenische Form</th>
+                                <!--Dosis: numeric value of the prescribed dosage, i.e. 500-->
+                                <th>Dosis</th>
+                                <!--Einheit: unit of measurement, i.e. mg, ml, g/ml-->
+                                <th>Einheit</th>
+                                <!--Schema: amount taken morning-midday-evening-night, i.e. 1-0-0-1-->
+                                <th>Schema</th>
+                                <!--Einnahmemodus: i.e. daily-->
+                                <th>Einnahmemodus</th>
+                                <!--Anwendungsinstruktion: if it is taken before meals, with water-->
+                                <th>Anwendungsinstruktion</th>
+                                <!--Verabreichungsweg: where and how it enters the body-->
+                                <th>Verabreichungsweg</th>
+                                <!--Anwendungsgrund: reason for taking the drug.-->
+                                <th>Anwendungsgrund</th>
+                                <!--Einnahme ab: date from which the medicament is taken-->
+                                <th>Einnahme ab</th>
+                                <!--Einnahme bis: date until which the medication is supposed to be taken-->
+                                <th>Einnahme bis</th>
+                                <!--Bemerkungen: annotations like commentary, if a substitute mustn't be used, things to look out for etc.-->
+                                <th>Bemerkungen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="medicine" value="" placeholder="Medikament"></td>
+                                <td><input type="text" name="activesubstance" value="" placeholder="Wirkstoff"></td>
+                                <td><input type="text" name="code" value="" placeholder="Code"></td>
+                                <td><input type="text" name="form" value="" placeholder="Galenische Form"></td>
+                                <td><input type="text" name="dose" value="" placeholder="Dosis"></td>
+                                <td><input type="text" name="unit" value="" placeholder="Einheit"></td>
+                                <td><input type="text" name="schema" value="" placeholder="Schema"></td>
+                                <td><input type="text" name="mode" value="" placeholder="Einnahmemodus"></td>
+                                <td><input type="text" name="instruction" value="" placeholder="Anwendungsinstruktion"></td>
+                                <td><input type="text" name="applicationform" value="" placeholder="Verabreichungsweg"></td>
+                                <td><input type="text" name="reason" value="" placeholder="Anwendungsgrund"></td>
+                                <td><input type="text" name="fromdate" value="" placeholder="01.01.2017"></td>
+                                <td><input type="text" name="todate" value="" placeholder="02.01.2017"></td>
+                                <td><input type="text" name="commentary" value="" placeholder="Kommentar"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+
+                <!-- Table to display next to main table -->
+                <div class="removeTable">
+                    <table id="myRemoveTable" class="table table-remove-medication">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="removeRow"><input type="image" src="images/Eraser-2-icon.png" width="auto" height="full" alt="Button" onclick="deleteRow(this); deleteEraser(this)"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+              </div>
 
                 <div class="adjustButtons">
-                  <button onclick="addRow()">Neues Medikament hinzufügen</button>
-                  <button id="saveChangesBtn" onclick="">Änderungen übernehmen</button>
+                    <button onclick="addRow(); addErasers()">Neues Medikament hinzufügen</button>
+                    <button class="saveChanges" onclick="">Änderungen übernehmen</button>
                 </div>
 
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
 
 
