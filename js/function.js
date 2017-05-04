@@ -1,4 +1,5 @@
-/* Custom JavaScript file. Do not use bootstrap JS files for changes. */
+/* Custom JavaScript file. Do not use bootstrap JS files for changes.
+    Please do not break this file */
 
 
 // Function to add more rows to existing medication table
