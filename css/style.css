@@ -159,7 +159,7 @@ body {
 .table-adjust-medication tr {
   margin: 0;
   padding: 0;
-  height: 37.9px !important;
+  height: 39.9px !important;
 }
 
 .table-adjust-medication input {
@@ -189,7 +189,7 @@ body {
   border: 0 !important;
 }
 .table-remove-medication tr{
-  height: 35px !important;
+  height: 40px !important;
 }
 .tableFont{
   font-size: 10px;
