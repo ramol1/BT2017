@@ -3,21 +3,7 @@
 
 // Function to add more rows to existing medication table
 function addRow(){
-  $('#myTable tr:last').after('<tr>
-    <td><input type="text" name="medicine" value="" placeholder="Medikament"></td>
-    <td><input type="text" name="activesubstance" value="" placeholder="Wirkstoff"></td>
-    <td><input type="text" name="code" value="" placeholder="Code"></td>
-    <td><input type="text" name="form" value="" placeholder="Galenische Form"></td>
-    <td><input type="text" name="dose" value="" placeholder="Dosis"></td>
-    <td><input type="text" name="unit" value="" placeholder="Einheit"></td><td><input type="text" name="schema" value="" placeholder="Schema"></td>
-    <td><input type="text" name="mode" value="" placeholder="Einnahmemodus"></td>
-    <td><input type="text" name="instruction" value="" placeholder="Anwendungsinstruktion"></td>
-    <td><input type="text" name="applicationform" value="" placeholder="Verabreichungsweg"></td>
-    <td><input type="text" name="reason" value="" placeholder="Anwendungsgrund"></td>
-    <td><input type="text" name="fromdate" value="" placeholder="01.01.2017"></td>
-    <td><input type="text" name="todate" value="" placeholder="02.01.2017"></td>
-    <td><input type="text" name="commentary" value="" placeholder="Kommentar"></td>
-  </tr>');
+  $('#myTable tr:last').after('<tr><td><input type="text" name="medicine" value="" placeholder="Medikament"></td><td><input type="text" name="activesubstance" value="" placeholder="Wirkstoff"></td><td><input type="text" name="code" value="" placeholder="Code"></td><td><input type="text" name="form" value="" placeholder="Galenische Form"></td><td><input type="text" name="dose" value="" placeholder="Dosis"></td><td><input type="text" name="unit" value="" placeholder="Einheit"></td><td><input type="text" name="schema" value="" placeholder="Schema"></td><td><input type="text" name="mode" value="" placeholder="Einnahmemodus"></td><td><input type="text" name="instruction" value="" placeholder="Anwendungsinstruktion"></td><td><input type="text" name="applicationform" value="" placeholder="Verabreichungsweg"></td><td><input type="text" name="reason" value="" placeholder="Anwendungsgrund"></td><td><input type="text" name="fromdate" value="" placeholder="01.01.2017"></td><td><input type="text" name="todate" value="" placeholder="02.01.2017"></td><td><input type="text" name="commentary" value="" placeholder="Kommentar"></td></tr>');
 }
 
 // Function to remove rows from adjust medication table
@@ -47,14 +33,6 @@ $(document).ready(function() {
 
 
 /*Function to iterate content from a table and display as json*/
-<<<<<<< Updated upstream
-var myRows = [];
-var headersText = [];
-var $headers = $("th");
-
-// Loop through grabbing everything
-var $rows = $("tbody tr").each(function(index) {
-=======
 function tableToJSON(){
   var myRows = [];
   var headersText = [];
@@ -63,21 +41,10 @@ function tableToJSON(){
 
   // Loop through grabbing everything
   var $rows = $("tbody tr").each(function(index) {
->>>>>>> Stashed changes
     $cells = $(this).find("td");
     myRows[index] = {};
 
     $cells.each(function(cellIndex) {
-<<<<<<< Updated upstream
-        // Set the header text
-        if (headersText[cellIndex] === undefined) {
-            headersText[cellIndex] = $($headers[cellIndex]).text();
-        }
-        // Update the row object with the header/cell combo
-        myRows[index][headersText[cellIndex]] = $(this).text();
-    });
-});
-=======
       // Set the header text
       if(headersText[cellIndex] === undefined) {
         headersText[cellIndex] = $($headers[cellIndex]).text();
@@ -86,7 +53,6 @@ function tableToJSON(){
       myRows[index][headersText[cellIndex]] = $(this).text();
     });
   });
->>>>>>> Stashed changes
 
   // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
   var myObj = {
