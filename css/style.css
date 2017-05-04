@@ -149,7 +149,9 @@ body {
   border: 1px solid black !important;
   border-spacing: 0 !important;
 }
-
+.table-adjust-medication{
+  margin-bottom: 0 !important;
+}
 .table-adjust-medication th {
   text-align: center;
   height: 58px;
