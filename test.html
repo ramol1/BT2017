@@ -107,19 +107,25 @@
 
                 <h2 class="sub-header">JSON Parser</h2>
 
-                <p id="demo"></p>
+                <html>
 
-                <script>
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            myObj = JSON.parse(this.responseText);
-                            document.getElementById("demo").innerHTML = myObj.name;
-                        }
-                    };
-                    xmlhttp.open("GET", "test.json", true);
-                    xmlhttp.send();
-                </script>
+                <head>
+                    <title>test</title>
+                </head>
+
+                <body>
+                    <form action="myurl" method="POST" name="myForm">
+                        <p><label for="first_name">First Name:</label>
+                            <input type="text" name="first_name" id="fname"></p>
+
+                        <p><label for="last_name">Last Name:</label>
+                            <input type="text" name="last_name" id="lname"></p>
+
+                        <input value="Submit" type="submit" onclick="submitform()">
+                    </form>
+                </body>
+
+                </html>
 
 
 

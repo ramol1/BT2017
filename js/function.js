@@ -65,6 +65,15 @@ function tableToJSON(){
 }
 
 //calls the conversion of the table to JSON when the "Änderungen übernehmen" button is clicked
-document.getElementById("saveChangesBtn").onclick = tableToJSON;
+//document.getElementById("saveChangesBtn").onclick = tableToJSON;
 
 //Code to export json as file
+
+
+// test serialize array
+function onSubmit( form ){
+  var data = JSON.stringify( $(form).serializeArray() ); //  <-----------
+
+  console.log( data );
+  return false; //don't submit
+}
