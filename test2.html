@@ -95,7 +95,7 @@
 
 
                 <h2 class="sub-header">Platzhalter Datum Medikationsplan</h2>
-
+                <form onsubmit='return onSubmit(this)'>
                 <div class="tableContainer">
 
                     <div class="table-responsive yeOldeAdjustTable">
@@ -134,7 +134,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <form onsubmit='return onSubmit(this)'>
+
                                         <td><input type="text" name="medicine" value="" placeholder="Medikament"></td>
                                         <td><input type="text" name="activesubstance" value="" placeholder="Wirkstoff"></td>
                                         <td><input type="text" name="code" value="" placeholder="Code"></td>
@@ -175,12 +175,10 @@
 
                 <div class="adjustButtons">
                     <button onclick="addRow(); addErasers()">Neues Medikament hinzufügen</button>
-
-                        <button class="saveChanges" type="submit" onclick="">Änderungen übernehmen</button>
-                    </form>
+                    <button class="saveChanges" type="submit" onclick="">Änderungen übernehmen</button>
                 </div>
 
-
+                </form>
             </div>
         </div>
     </div>
