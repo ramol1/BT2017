@@ -4,7 +4,7 @@
 
 // Function to add more rows to existing medication table
 function addRow(){
-  $('#myTable tr:last').after('<tr><td><input type="text" name="medicine" value="" placeholder="Medikament"></td><td><input type="text" name="activesubstance" value="" placeholder="Wirkstoff"></td><td><input type="text" name="code" value="" placeholder="Code"></td><td><input type="text" name="form" value="" placeholder="Galenische Form"></td><td><input type="text" name="dose" value="" placeholder="Dosis"></td><td><input type="text" name="unit" value="" placeholder="Einheit"></td><td><input type="text" name="schema" value="" placeholder="Schema"></td><td><input type="text" name="mode" value="" placeholder="Einnahmemodus"></td><td><input type="text" name="instruction" value="" placeholder="Anwendungsinstruktion"></td><td><input type="text" name="applicationform" value="" placeholder="Verabreichungsweg"></td><td><input type="text" name="reason" value="" placeholder="Anwendungsgrund"></td><td><input type="text" name="fromdate" value="" placeholder="01.01.2017"></td><td><input type="text" name="todate" value="" placeholder="02.01.2017"></td><td><input type="text" name="commentary" value="" placeholder="Kommentar"></td></tr>');
+  $('#myTable tr:last').after('<tr><td><input type="text" name="medicine" value="" placeholder="Medikament"></td><td><input type="text" name="medActivesubstance" value="" placeholder="Wirkstoff"></td><td><input type="text" name="medCode" value="" placeholder="Code"></td><td><input type="text" name="medGalenicForm" value="" placeholder="Galenische Form"></td><td><input type="text" name="medDose" value="" placeholder="Dosis"></td><td><input type="text" name="medMeasureUnit" value="" placeholder="Einheit"></td><td><input type="text" name="medSchema" value="" placeholder="Schema"></td><td><input type="text" name="medMode" value="" placeholder="Einnahmemodus"></td><td><input type="text" name="medInstruction" value="" placeholder="Anwendungsinstruktion"></td><td><input type="text" name="medApplicationform" value="" placeholder="Verabreichungsweg"></td><td><input type="text" name="medReason" value="" placeholder="Anwendungsgrund"></td><td><input type="text" name="medFromdate" value="" placeholder="01.01.2000"></td><td><input type="text" name="medTodate" value="" placeholder="02.01.2000"></td><td><input type="text" name="medPrescriber" value="" placeholder="Verschreibender"></td><td><input type="text" name="medPrescriptionDate" value="" placeholder="01.01.2000"></td><td><input type="text" name="medCommentary" value="" placeholder="Kommentar"></td></tr>');
 }
 
 // Function to remove rows from adjust medication table
@@ -69,11 +69,21 @@ function tableToJSON(){
 
 //Code to export json as file
 
-
+var medForm;
 // test serialize array
 function onSubmit( form ){
-  var data = JSON.stringify( $(form).serializeArray() ); //  <-----------
-
-  console.log( data );
+  var medForm = JSON.stringify( $(form).serializeArray() ); //  <-----------
+  localStorage.setItem("medForm", medForm);
+  console.log( medForm );
   return false; //don't submit
 }
+
+
+
+//to insert the JSON into the table
+  medForm = JSON.parse(localStorage.getItem("medForm"));
+  var tableData;
+$.each(medForm, function(index, data) {
+ tableData += '<tr><td>'+data.medicine+'</td><td>'+data.medActivesubstance+'</td><td>'+data.medCode+'</td><td>'+data.medGalenicForm+'</td><td>'+data.medDose+'</td><td>'+data.medMeasureUnit+'</td><td>'+data.medSchema+'</td><td>'+data.medMode+'</td><td>'+data.medInstruction+'</td><td>'+data.medApplicationform+'</td><td>'+data.medReason+'</td><td>'+data.medFromdate+'</td><td>'+data.medTodate+'</td><td>'+data.medPrescriber+'</td><td>'+data.medPrescriptionDate+'</td><td>'+data.medCommentary+'</td></tr>';
+});
+$('#newMedication').append(tableData);
