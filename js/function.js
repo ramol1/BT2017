@@ -81,9 +81,27 @@ function onSubmit( form ){
 
 
 //to insert the JSON into the table
-  medForm = JSON.parse(localStorage.getItem("medForm"));
-  var tableData;
-$.each(medForm, function(index, data) {
- tableData += '<tr><td>'+data.medicine+'</td><td>'+data.medActivesubstance+'</td><td>'+data.medCode+'</td><td>'+data.medGalenicForm+'</td><td>'+data.medDose+'</td><td>'+data.medMeasureUnit+'</td><td>'+data.medSchema+'</td><td>'+data.medMode+'</td><td>'+data.medInstruction+'</td><td>'+data.medApplicationform+'</td><td>'+data.medReason+'</td><td>'+data.medFromdate+'</td><td>'+data.medTodate+'</td><td>'+data.medPrescriber+'</td><td>'+data.medPrescriptionDate+'</td><td>'+data.medCommentary+'</td></tr>';
-});
-$('#newMedication').append(tableData);
+medForm = JSON.parse(localStorage.getItem("medForm"));
+//var tableData;
+//$.each(medForm, function(index, data) {
+//  tableData += //'<tr><td>'+data.medicine+'</td><td>'+data.medActivesubstance+'</td><td>'+data.medCode+'</td><td>'+data.medGalenicForm+'</td><td>'+data.medDose+'</td><td>'+data.medMeasureUnit+'</td><td>'+data.medSchema+'</td><td>'+data.medMode+'</td><td>'+data.medInstruction+'</td><td>'+data.medApplicationform+'</td><td>'+data.medReason+'</td><td>'+data.medFromdate+'</td><td>'+data.medTodate+'</td><td>'+data.medPrescriber+'</td><td>'+data.medPrescriptionDate+'</td><td>'+data.medCommentary+'</td></tr>';
+//});
+//$('#newMedication').append(tableData);
+
+
+//---------------------
+var tablearr ='<tr>';
+
+for(var i = 0, len = medForm.length; i < len; i++) {
+    tablearr += '<td>' + medForm[i].value + '</td>';
+
+
+    if (i == medForm.length-1) {
+      tablearr += '</tr>';
+    }
+    else if (i>1 && (i+1)%16 == 0) {
+      tablearr += '</tr><tr>'
+    }
+}
+
+$('#newMedication').append(tablearr);
