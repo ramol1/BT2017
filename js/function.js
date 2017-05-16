@@ -2,7 +2,7 @@
     Please do not break this file */
 
 
-// Function to add more rows to existing medication table
+// Function to add more rows to existing medication table at last position
 function addRow(){
   $('#myTable tr:last').after('<tr><td><input type="text" name="medicine" value="" placeholder="Medikament"></td><td><input type="text" name="medActivesubstance" value="" placeholder="Wirkstoff"></td><td><input type="text" name="medCode" value="" placeholder="Code"></td><td><input type="text" name="medGalenicForm" value="" placeholder="Galenische Form"></td><td><input type="text" name="medDose" value="" placeholder="Dosis"></td><td><input type="text" name="medMeasureUnit" value="" placeholder="Einheit"></td><td><input type="text" name="medSchema" value="" placeholder="Schema"></td><td><input type="text" name="medMode" value="" placeholder="Einnahmemodus"></td><td><input type="text" name="medInstruction" value="" placeholder="Anwendungsinstruktion"></td><td><input type="text" name="medApplicationform" value="" placeholder="Verabreichungsweg"></td><td><input type="text" name="medReason" value="" placeholder="Anwendungsgrund"></td><td><input type="text" name="medFromdate" value="" placeholder="01.01.2000"></td><td><input type="text" name="medTodate" value="" placeholder="02.01.2000"></td><td><input type="text" name="medPrescriber" value="" placeholder="Verschreibender"></td><td><input type="text" name="medPrescriptionDate" value="" placeholder="01.01.2000"></td><td><input type="text" name="medCommentary" value="" placeholder="Kommentar"></td></tr>');
 }
@@ -13,7 +13,7 @@ function deleteRow(r) {
     document.getElementById("myTable").deleteRow(i);
 }
 
-// Somehow a copy from the add and remove stuff from above to use it on the remove table weeeeee
+// Same function as addRow for more table rows but for the eraser table
 function addErasers(){
   $('#myRemoveTable tr:last').after('<tr><td class="removeRow"><input type="image" src="images/Eraser-2-icon.png" alt="Button" onclick="deleteRow(this); deleteEraser(this)"></td></tr>');
 }
