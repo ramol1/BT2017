@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description"
+	content="Bachelor Thesis Project Spring semester 2017" />
+<meta name="author" content="Christine Noser, Luca Ramos Brito" />
+
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap-theme.css" rel="stylesheet" />
+<link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Stylesheet for individual changes -->
+<link href="css/style.css" rel="stylesheet" />
+
+
+<title>Aktuelle Medikation</title>
+</head>
+
+<body>
+
+	<!-- <h:outputText value="#{adjustMedicationView.jsonString}"></h:outputText> -->
+	
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Elektek</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="choosepatient.xhtml">Patient wechseln</a></li>
+				<!--<li><a href="#contact">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          -->
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="index.xhtml">Logout</a></li>
+				<!--<li><a href="../navbar/">Default</a></li>
+          <li><a href="../navbar-static-top/">Static top</a></li>
+          <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
+			</ul>
+			<!--<form class="navbar-form navbar-right">
+          <input type="text" class="form-control" placeholder="Search...">
+        </form>-->
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+
+				<!-- Dynamicaly generated data about patient -->
+				<ul class="patient-info">
+					<li>Vorname:</li>
+					<li>Nachname:</li>
+					<li>Geburtsdatum:</li>
+					<li>Geschlecht:</li>
+				</ul>
+
+				<ul class="nav nav-sidebar">
+					<li class="active"><a href="home.xhtml">Aktuelle
+							Medikation<span class="sr-only">(current)</span>
+					</a></li>
+					<li><a href="adjustmedication.xhtml">Medikation ändern</a></li>
+					<li><a href="medicationhistory.xhtml">Medikationshistorie</a></li>
+				</ul>
+
+				<!--<ul class="nav nav-sidebar">
+          <li><a href="">Nav item</a></li>
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+          <li><a href="">More navigation</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+        </ul>-->
+			</div>
+			<div
+				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main adjustButtons">
+				<!--sets upper header with button on the right side-->
+				<div class="page-header cmPageHeader">
+					<button class="cmButton changeMedication"
+						onclick="location.href='adjustmedication.xhtml';">Medikation
+						ändern</button>
+					<h1 class="noTopMargin">Aktuelle Medikation im EPD</h1>
+				</div>
+
+				<!-- Table for the current medication. Content is loaded dynamically based on informations stored in the EHR -->
+				<div class="table-responsive cmRow">
+					<table class="table table-current-medication tableFont">
+						<thead>
+							<tr>
+								<!--Medikament: name of the medicament-->
+								<th>Medikament</th>
+								<!--Wirkstoff: the active ingredient for which the medicament is taken.-->
+								<th>Wirkstoff</th>
+								<!--Code: GTIN,Pharmacode,...-->
+								<th>Code</th>
+								<!--Galenische Form: if it is a pill, a powder, a fluid,...-->
+								<th>Galenische Form</th>
+								<!--Dosis: numeric value of the prescribed dosage, i.e. 500-->
+								<th>Dosis</th>
+								<!--Einheit: unit of measurement, i.e. mg, ml, g/ml-->
+								<th>Einheit</th>
+								<!--Schema: amount taken morning-midday-evening-night, i.e. 1-0-0-1-->
+								<th>Schema</th>
+								<!--Einnahmemodus: i.e. daily-->
+								<th>Einnahmemodus</th>
+								<!--Anwendungsinstruktion: if it is taken before meals, with water-->
+								<th>Anwendungsinstruktion</th>
+								<!--Verabreichungsweg: where and how it enters the body-->
+								<th>Verabreichungsweg</th>
+								<!--Anwendungsgrund: reason for taking the drug.-->
+								<th>Anwendungsgrund</th>
+								<!--Einnahme ab: date from which the medicament is taken-->
+								<th>Einnahme ab</th>
+								<!--Einnahme bis: date until which the medication is supposed to be taken-->
+								<th>Einnahme bis</th>
+								<!--Verordnet durch: prescribing physician-->
+								<th>Verordnet durch</th>
+								<!--Verordnungsdatum: date on which the prescription was made-->
+								<th>Verordnungsdatum</th>
+								<!--Bemerkungen: annotations like commentary, if a substitute mustn't be used, things to look out for etc.-->
+								<th>Bemerkungen</th>
+							</tr>
+						</thead>
+						<tbody id="currentMedicationTable">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div
+				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main adjustButtons">
+				<!--defines lower header with button on the right side-->
+				<div class="page-header cmPageHeader">
+				
+				
+				<!-- 
+					<button class="cmButton changeMedication"
+						onclick="location.href='adjustmedication.xhtml';">Medikation
+						ins EPD laden</button>
+					-->
+					
+				<h:form>	
+				<h:commandButton value="Medikation ins EPD laden"
+                     action="#{adjustMedicationView.submitDocument()}" />	
+				</h:form>		
+						
+					<h1 class="noTopMargin">Neue Medikation</h1>
+				</div>
+
+
+
+				<!-- Table for the new defined Medication in the adjustmedication page -->
+				<div class="table-responsive cmRow">
+					<table class="table table-current-medication tableFont">
+						<thead>
+							<tr>
+								<!--Medikament: name of the medicament-->
+								<th>Medikament</th>
+								<!--Wirkstoff: the active ingredient for which the medicament is taken.-->
+								<th>Wirkstoff</th>
+								<!--Code: GTIN,Pharmacode,...-->
+								<th>Code</th>
+								<!--Galenische Form: if it is a pill, a powder, a fluid,...-->
+								<th>Galenische Form</th>
+								<!--Dosis: numeric value of the prescribed dosage, i.e. 500-->
+								<th>Dosis</th>
+								<!--Einheit: unit of measurement, i.e. mg, ml, g/ml-->
+								<th>Einheit</th>
+								<!--Schema: amount taken morning-midday-evening-night, i.e. 1-0-0-1-->
+								<th>Schema</th>
+								<!--Einnahmemodus: i.e. daily-->
+								<th>Einnahmemodus</th>
+								<!--Anwendungsinstruktion: if it is taken before meals, with water-->
+								<th>Anwendungsinstruktion</th>
+								<!--Verabreichungsweg: where and how it enters the body-->
+								<th>Verabreichungsweg</th>
+								<!--Anwendungsgrund: reason for taking the drug.-->
+								<th>Anwendungsgrund</th>
+								<!--Einnahme ab: date from which the medicament is taken-->
+								<th>Einnahme ab</th>
+								<!--Einnahme bis: date until which the medication is supposed to be taken-->
+								<th>Einnahme bis</th>
+								<!--Verordnet durch: prescribing physician-->
+								<th>Verordnet durch</th>
+								<!--Verordnungsdatum: date on which the prescription was made-->
+								<th>Verordnungsdatum</th>
+								<!--Bemerkungen: annotations like commentary, if a substitute mustn't be used, things to look out for etc.-->
+								<th>Bemerkungen</th>
+							</tr>
+						</thead>
+						<tbody id="newMedication">
+						</tbody>
+					</table>
+				</div>
+
+
+
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<script src="js/bootstrap.min.js"></script>
+	
+
+	<!-- Custom JavaScript files -->
+	<script src="js/function.js"></script>
+	
+	<h:outputText id="rawDataCurrentMedication" value="#{adjustMedicationView.currentMedicationString}"></h:outputText>
+	
+	
+	<script type="text/javascript">
+		window.onload = prepareCurrentMedication();
+	</script>
+
+</body>
+
+</html>

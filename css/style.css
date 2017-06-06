@@ -230,23 +230,23 @@ textarea {
 /*
 * Content of Medication history page medicationhistory.html
 */
-#panel, #flip {
+.panel, .flip {
     padding: 5px;
     text-align: center;
     background-color: #eee;
     border: solid 1px #c3c3c3;
 }
 
-#flip {
+.flip {
   cursor: pointer;
 }
 
-#panel {
+.panel {
     display: none;
     padding: 0;
 }
 
-#panel .table {
+.panel .table {
   margin-bottom: 0;
 }
 

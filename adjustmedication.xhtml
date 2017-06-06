@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Bachelor Thesis Project Spring semester 2017"/>
+    <meta name="author" content="Christine Noser, Luca Ramos Brito"/>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Stylesheet for individual changes -->
+    <link href="css/style.css" rel="stylesheet"/>
+
+
+    <title>Medikation ändern</title>
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a class="navbar-brand" href="#">Elektek</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="choosepatient.xhtml">Patient wechseln</a></li>
+                    <!--<li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                </ul>
+                </li>
+                -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.xhtml">Logout</a></li>
+                    <!--<li><a href="../navbar/">Default</a></li>
+                    <li><a href="../navbar-static-top/">Static top</a></li>
+                    <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
+                </ul>
+                <!--<form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>-->
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+
+
+                <!-- Dynamicaly generated data about patient -->
+                <ul class="patient-info">
+                    <li>Vorname:</li>
+                    <li>Nachname:</li>
+                    <li>Geburtsdatum: </li>
+                    <li>Geschlecht: </li>
+                </ul>
+
+
+                <ul class="nav nav-sidebar">
+                    <li><a href="home.xhtml">Aktuelle Medikation</a></li>
+                    <li class="active"><a href="adjustmedication.xhtml">Medikation ändern<span class="sr-only">(current)</span></a></li>
+                    <li><a href="medicationhistory.xhtml">Medikationshistorie</a></li>
+                </ul>
+
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">Medikation ändern</h1>
+
+
+                <h2 class="sub-header">Platzhalter Datum Medikationsplan</h2>
+                <form id="adjustMedicationForm" >
+                <div class="tableContainer">
+
+                    <div class="table-responsive yeOldeAdjustTable">
+                        <table id="myTable" class="table table-adjust-medication">
+                            <thead>
+                                <tr>
+                                    <!--Medikament: name of the medicament-->
+                                    <th>Medikament</th>
+                                    <!--Wirkstoff: the active ingredient for which the medicament is taken.-->
+                                    <th>Wirkstoff</th>
+                                    <!--Code: GTIN,Pharmacode,...-->
+                                    <th>Code</th>
+                                    <!--Galenische Form: if it is a pill, a powder, a fluid,...-->
+                                    <th>Galenische Form</th>
+                                    <!--Dosis: numeric value of the prescribed dosage, i.e. 500-->
+                                    <th>Dosis</th>
+                                    <!--Einheit: unit of measurement, i.e. mg, ml, g/ml-->
+                                    <th>Einheit</th>
+                                    <!--Schema: amount taken morning-midday-evening-night, i.e. 1-0-0-1-->
+                                    <th>Schema</th>
+                                    <!--Einnahmemodus: i.e. daily-->
+                                    <th>Einnahmemodus</th>
+                                    <!--Anwendungsinstruktion: if it is taken before meals, with water-->
+                                    <th>Anwendungsinstruktion</th>
+                                    <!--Verabreichungsweg: where and how it enters the body-->
+                                    <th>Verabreichungsweg</th>
+                                    <!--Anwendungsgrund: reason for taking the drug.-->
+                                    <th>Anwendungsgrund</th>
+                                    <!--Einnahme ab: date from which the medicament is taken-->
+                                    <th>Einnahme ab</th>
+                                    <!--Einnahme bis: date until which the medication is supposed to be taken-->
+                                    <th>Einnahme bis</th>
+                                    <!--Verordnet durch: prescribing physician-->
+                                    <th>Verordnet durch</th>
+                                    <!--Verordnungsdatum: date on which the prescription was made-->
+                                    <th>Verordnungsdatum</th>
+                                    <!--Bemerkungen: annotations like commentary, if a substitute mustn't be used, things to look out for etc.-->
+                                    <th>Bemerkungen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                        <td><input type="text" name="medicine" value="" placeholder="Medikament"/></td>
+                                        <td><input type="text" name="medActivesubstance" value="" placeholder="Wirkstoff"/></td>
+                                        <td><input type="text" name="medCode" value="" placeholder="Code"/></td>
+                                        <td><input type="text" name="medGalenicForm" value="" placeholder="Galenische Form"/></td>
+                                        <td><input type="text" name="medDose" value="" placeholder="Dosis"/></td>
+                                        <td><input type="text" name="medMeasureUnit" value="" placeholder="Einheit"/></td>
+                                        <td><input type="text" name="medSchema" value="" placeholder="Schema"/></td>
+                                        <td><input type="text" name="medMode" value="" placeholder="Einnahmemodus"/></td>
+                                        <td><input type="text" name="medInstruction" value="" placeholder="Anwendungsinstruktion"/></td>
+                                        <td><input type="text" name="medApplicationform" value="" placeholder="Verabreichungsweg"/></td>
+                                        <td><input type="text" name="medReason" value="" placeholder="Anwendungsgrund"/></td>
+                                        <td><input type="text" name="medFromdate" value="" placeholder="01.01.2000"/></td>
+                                        <td><input type="text" name="medTodate" value="" placeholder="02.01.2000"/></td>
+                                        <td><input type="text" name="medPrescriber" value="" placeholder="Verschreibender"/></td>
+                                        <td><input type="text" name="medPrescriptionDate" value="" placeholder="01.01.2000"/></td>
+                                        <td><input type="text" name="medCommentary" value="" placeholder="Kommentar"/></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table to display next to main table -->
+                    <div class="removeTable">
+                        <table id="myRemoveTable" class="table table-remove-medication">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="removeRow"><input type="image" src="images/Eraser-2-icon.png" width="auto" height="full" alt="Button" onclick="deleteRow(this); deleteEraser(this)"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+                </form>
+                
+                <div class="adjustButtons">
+                    <button onclick="addRow(); addErasers()">Neues Medikament hinzufügen</button>
+                   <button class="saveChanges" onclick="extractJSONData()">Änderungen übernehmen</button> 
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+   
+   <!-- 
+    <script type="text/javascript">
+        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+    </script>
+ -->
+    
+    
+    <script src="js/bootstrap.min.js"></script>
+    
+    
+    
+
+    <!-- Custom JavaScript files -->
+    <script src="js/function.js"></script>
+    
+     <script src="js/jquery.redirect.js"></script>
+   
+   
+
+    <script type="text/javascript">
+    
+    function extractJSONData(){
+	    var medForm = JSON.stringify($(document.getElementById('adjustMedicationForm')).serializeArray()); 
+	    localStorage.setItem("medForm", medForm);
+	    console.log( medForm );
+	     
+	    
+	    
+	    $.redirect('home.xhtml', {'jsonstuff': medForm});
+	    //window.location = 'home.xhtml?jsonMedication=' + medForm;
+    }
+    </script>
+
+</body>
+
+</html>

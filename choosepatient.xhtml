@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description"
+	content="Bachelor Thesis Project Spring semester 2017" />
+<meta name="author" content="Christine Noser, Luca Ramos Brito" />
+
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap-theme.css" rel="stylesheet" />
+<link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Stylesheet for individual changes -->
+<link href="css/style.css" rel="stylesheet" />
+
+
+<title>Übersicht</title>
+</head>
+
+<body>
+	<!-- Fixed navbar top -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Elektek</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#">Home</a></li>
+				<li class="active"><a href="choosepatient.xhtml">Patient
+						wechseln</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="index.xhtml">Logout</a></li>
+			</ul>
+
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	</nav>
+
+	<!--Begin page content -->
+	<div>
+		<h1 class="page-header cpPageHeader">Patient wählen</h1>
+	</div>
+	<div class="cpContainer">
+
+		<div class="col-md-4 cpLeftCol">
+			<div>
+				<h2 class="sub-header">Liste meiner Patienten</h2>
+			</div>
+			<div class="cpScroll">
+
+				<!-- Displays patients that are queried in the ChoosePatientView Java class  -->
+				<nav class="patientList"> <h:dataTable
+					value="#{choosePatientView.patientlist}" var="patient">
+					<h:column>
+						<h:outputText value="#{patient.familyName}" />
+					</h:column>
+				</h:dataTable> </nav>
+			</div>
+		</div>
+		<div class="col-md-8 cpRightCol adjustButtons">
+			<h2 class="sub-header">Patient im EPD suchen</h2>
+			Vorname <input type="text" class="form-control cpTextfield"
+				placeholder="Vorname" /> Nachname <input type="text"
+				class="form-control cpTextfield" placeholder="Nachname" />
+			Geburtsdatum <input type="text" class="form-control cpTextfield"
+				placeholder="Geburtsdatum" />
+			<button onclick="location.href='adjustmedication.xhtml';">
+				Suchen</button>
+		</div>
+
+
+
+
+
+
+
+
+
+	</div>
+</body>
+
+</html>

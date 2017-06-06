@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="Bachelor Thesis Project Spring semester 2017"/>
+  <meta name="author" content="Christine Noser, Luca Ramos Brito"/>
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap-theme.css" rel="stylesheet"/>
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+  <link href="css/bootstrap.css" rel="stylesheet"/>
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Stylesheet for individual changes -->
+  <link href="css/style.css" rel="stylesheet"/>
+
+
+  <title>Login</title>
+</head>
+<body class="loginBackground">
+  <div class="loginContainer adjustButtons">
+    <form class="formLogin">
+      <h2>Login</h2>
+      <!--<label><b>inputUsername</b></label>-->
+      <input id="inputUsername" class="form-control loginStyle" placeholder="Username" required="true" autofocus="true"/>
+      <!--<label><b>inputPassword</b></label>-->
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="true"/>
+      <button class="loginButton" type="submit" onclick="location.href='adjustmedication.xhtml';">Login</button>
+    </form>
+  </div>
+</body>
+</html>

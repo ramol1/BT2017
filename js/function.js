@@ -26,11 +26,14 @@ function deleteEraser(r) {
 
 
 // Function to open and collapse tables
+/*
 $(document).ready(function() {
-    $("#flip").click(function() {
-        $("#panel").slideToggle("slow");
+    $(".flip").click(function() {
+        $(".panel").slideToggle("slow");
     });
 });
+
+*/
 
 
 /*Function to iterate content from a table and display as json*/
@@ -75,9 +78,130 @@ function onSubmit( form ){
   var medForm = JSON.stringify( $(form).serializeArray() ); //  <-----------
   localStorage.setItem("medForm", medForm);
   console.log( medForm );
+  document.getElementById('jsonObjects').value = medForm;
   return false; //don't submit
 }
 
+// macht aus dem adjustForm
+function prepareMedication(){
+	var jsonData = JSON.stringify(document.getElementById("adjustForm"));
+	document.getElementById('jsonObjects').value = jsonData ;
+}
+
+
+
+function prepareHistory(){
+	var rawData = document.getElementById('jsonHistoryData').innerHTML;
+	var rawDates = document.getElementById('jsonHistoryDates').innerHTML;
+	
+	var dataArray = rawData.split("|");
+	var datesArray = rawDates.split("|");
+	
+	function createToggler( iterator ){
+		  return function(){
+			 $('#panel' + iterator).slideToggle('slow');
+		  }
+		}
+	
+	for (var iterator = 0; iterator < dataArray.length; iterator++) {
+	    
+		var guiString = '<div class="flip" id="flip' + iterator + '">' + datesArray[iterator]  + '</div><div class="panel" id="panel'+ iterator +'">'
+		 + '<div class="table-responsive">' 
+	     + '<table class="table table-current-medication collapsed-table">'
+		 + '<thead><tr><th>Medikament</th><th>Wirkstoff</th><th>Code</th><th>Galenische Form</th>'
+		 + '<th>Dosis</th><th>Einheit</th><th>Schema</th><th>Einnahmemodus</th>'
+		 + '<th>Anwendungsinstruktion</th><th>Verabreichungsweg</th><th>Anwendungsgrund</th>'
+		 + '<th>Einnahme ab</th><th>Einnahme bis</th><th>Verordnet durch</th>'
+		 + '<th>Verordnungsdatum</th><th>Bemerkungen</th></tr></thead>'
+		 + '<tbody id="historyMedication' + iterator + '">'
+		 + '</tbody></table></div></div>'
+		 + '<div style="height:20px"></div>';
+		
+		var medContainer = document.getElementById('historyContent');
+		medContainer.insertAdjacentHTML('beforeend', guiString);
+		
+		console.log(guiString);
+		console.log(datesArray[iterator]);
+		console.log(dataArray[iterator]);
+
+		historyItem = JSON.parse(dataArray[iterator]);
+		var tablearr ='<tr>';
+		for(var i = 0, len = historyItem.length; i < len; i++) {
+		    tablearr += '<td>' + historyItem[i].value + '</td>';
+		    if (i == historyItem.length-1) {
+		      tablearr += '</tr>';
+		    }
+		    else if (i>1 && (i+1)%16 == 0) {
+		      tablearr += '</tr><tr>'
+		    }
+		}
+	
+		var selectorMed = '#historyMedication' + iterator;
+		console.log(selectorMed);
+		$(selectorMed).append(tablearr);
+		
+		/*
+		var selectorFlip = '#flip' + iterator;
+		console.log(selectorFlip);
+		var selectorPanel = '#panel' + iterator;
+		console.log(selectorPanel);
+		*/
+		
+		$('#flip' + iterator).click( createToggler( iterator ) );
+		
+		/*
+		$(selectorFlip+'').click(function() {
+	        $(selectorPanel+'').slideToggle('slow');
+	    });
+	    
+	    */
+		
+		/*
+		$(selectorFlip).click(function() {
+	        $(selectorPanel).slideToggle("slow");
+	    });
+	    */
+		
+	}
+	
+	
+}
+
+function prepareCurrentMedication(){
+	var rawCurrentMedData = document.getElementById('rawDataCurrentMedication').innerHTML;
+	
+	var currentMedicationJsonString = JSON.parse(rawCurrentMedData);
+	var tablearr ='<tr>';
+	for(var i = 0, len = currentMedicationJsonString.length; i < len; i++) {
+	    tablearr += '<td>' + currentMedicationJsonString[i].value + '</td>';
+	    if (i == currentMedicationJsonString.length-1) {
+	      tablearr += '</tr>';
+	    }
+	    else if (i>1 && (i+1)%16 == 0) {
+	      tablearr += '</tr><tr>'
+	    }
+	}
+	
+	$("#currentMedicationTable").append(tablearr);
+}
+
+function prepareHomeMedication(){
+	var rawCurrentMedData = document.getElementById('homeMedicationOutput').innerHTML;
+	
+	var currentMedicationJsonString = JSON.parse(rawCurrentMedData);
+	var tablearr ='<tr>';
+	for(var i = 0, len = currentMedicationJsonString.length; i < len; i++) {
+	    tablearr += '<td>' + currentMedicationJsonString[i].value + '</td>';
+	    if (i == currentMedicationJsonString.length-1) {
+	      tablearr += '</tr>';
+	    }
+	    else if (i>1 && (i+1)%16 == 0) {
+	      tablearr += '</tr><tr>'
+	    }
+	}
+	
+	$("#homeMedicationTable").append(tablearr);
+}
 
 
 //to insert the JSON into the table
