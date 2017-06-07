@@ -96,6 +96,19 @@ body {
  * Content for the Current Medication page currentmedication.html
  */
 
+#homeMedicationOutput {
+  display: none;
+}
+
+#historyContent {
+  margin-left: 14%;
+  width: 85%;
+}
+
+#rawDataCurrentMedication {
+	display: none;
+}
+
  /* Table current Medication */
 .table-current-medication td, .table-current-medication th {
   border: 1px solid black !important;
@@ -211,6 +224,19 @@ textarea {
   width: auto;
 }
 
+/* Fake link at choosepatient page to bamboozle */
+.patientList td {
+	color: #000000;
+}
+
+.patientList td:hover {
+    color: #1800f4;
+    cursor: pointer;
+}
+
+.patientList td:focus {
+    color: #1800f4;
+}
 
 /* beep beep dumb code to float them tables */
 .yeOldeAdjustTable {
@@ -230,6 +256,10 @@ textarea {
 /*
 * Content of Medication history page medicationhistory.html
 */
+#jsonHistoryData, #jsonHistoryDates {
+	display: none;
+}
+
 .panel, .flip {
     padding: 5px;
     text-align: center;

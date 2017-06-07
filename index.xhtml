@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -30,14 +30,21 @@
 </head>
 <body class="loginBackground">
   <div class="loginContainer adjustButtons">
-    <form class="formLogin">
+    <form name="login" class="formLogin">
       <h2>Login</h2>
       <!--<label><b>inputUsername</b></label>-->
-      <input id="inputUsername" class="form-control loginStyle" placeholder="Username" required="true" autofocus="true"/>
+      <input id="inputUsername" name="userid" class="form-control loginStyle" placeholder="Username" required="true" autofocus="true"/>
       <!--<label><b>inputPassword</b></label>-->
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="true"/>
-      <button class="loginButton" type="submit" onclick="location.href='adjustmedication.xhtml';">Login</button>
+      <input type="password" id="inputPassword" name="userpass" class="form-control" placeholder="Password" required="true"/>
+      <button class="loginButton" type="submit" onclick="check(this.form)">Login</button>
     </form>
   </div>
 </body>
+
+<!-- Custom JavaScript files -->
+<script src="js/function.js"></script>
+
+<script src="js/jquery.redirect.js"></script>
+
+
 </html>

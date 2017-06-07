@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -32,7 +32,7 @@
 <body>
 
 	<!-- <h:outputText value="#{adjustMedicationView.jsonString}"></h:outputText> -->
-	
+
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
@@ -44,37 +44,17 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Elektek</a>
+			<a class="navbar-brand" href="#">AMP</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
 				<li><a href="choosepatient.xhtml">Patient wechseln</a></li>
-				<!--<li><a href="#contact">Contact</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-          -->
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="index.xhtml">Logout</a></li>
-				<!--<li><a href="../navbar/">Default</a></li>
-          <li><a href="../navbar-static-top/">Static top</a></li>
-          <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
 			</ul>
-			<!--<form class="navbar-form navbar-right">
-          <input type="text" class="form-control" placeholder="Search...">
-        </form>-->
 		</div>
 		<!--/.nav-collapse -->
 	</div>
@@ -84,12 +64,12 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 
-				<!-- Dynamicaly generated data about patient -->
+				<!-- Data about patient should be dynamically generated, but in this prototype it isn't -->
 				<ul class="patient-info">
-					<li>Vorname:</li>
-					<li>Nachname:</li>
-					<li>Geburtsdatum:</li>
-					<li>Geschlecht:</li>
+						<li>Vorname:       Sandra</li>
+						<li>Nachname:      Ackermann</li>
+						<li>Geburtsdatum:  30.03.1930</li>
+						<li>Geschlecht:    Weiblich</li>
 				</ul>
 
 				<ul class="nav nav-sidebar">
@@ -100,18 +80,6 @@
 					<li><a href="medicationhistory.xhtml">Medikationshistorie</a></li>
 				</ul>
 
-				<!--<ul class="nav nav-sidebar">
-          <li><a href="">Nav item</a></li>
-          <li><a href="">Nav item again</a></li>
-          <li><a href="">One more nav</a></li>
-          <li><a href="">Another nav item</a></li>
-          <li><a href="">More navigation</a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="">Nav item again</a></li>
-          <li><a href="">One more nav</a></li>
-          <li><a href="">Another nav item</a></li>
-        </ul>-->
 			</div>
 			<div
 				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main adjustButtons">
@@ -163,7 +131,7 @@
 							</tr>
 						</thead>
 						<tbody id="currentMedicationTable">
-							
+
 						</tbody>
 					</table>
 				</div>
@@ -173,19 +141,19 @@
 				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main adjustButtons">
 				<!--defines lower header with button on the right side-->
 				<div class="page-header cmPageHeader">
-				
-				
-				<!-- 
+
+
+				<!--
 					<button class="cmButton changeMedication"
 						onclick="location.href='adjustmedication.xhtml';">Medikation
 						ins EPD laden</button>
 					-->
-					
-				<h:form>	
-				<h:commandButton value="Medikation ins EPD laden"
-                     action="#{adjustMedicationView.submitDocument()}" />	
-				</h:form>		
-						
+
+				<h:form>
+				<h:commandButton styleClass="cmButton changeMedication" value="Medikation ins EPD laden"
+                     action="#{adjustMedicationView.submitDocument()}" />
+				</h:form>
+
 					<h1 class="noTopMargin">Neue Medikation</h1>
 				</div>
 
@@ -253,14 +221,14 @@
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 	<script src="js/bootstrap.min.js"></script>
-	
+
 
 	<!-- Custom JavaScript files -->
 	<script src="js/function.js"></script>
-	
+
 	<h:outputText id="rawDataCurrentMedication" value="#{adjustMedicationView.currentMedicationString}"></h:outputText>
-	
-	
+
+
 	<script type="text/javascript">
 		window.onload = prepareCurrentMedication();
 	</script>

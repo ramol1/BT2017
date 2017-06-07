@@ -43,7 +43,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Elektek</a>
+			<a class="navbar-brand" href="#">AMP</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
@@ -62,12 +62,12 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 
-				<!-- Dynamicaly generated data about patient -->
+				<!-- Data about patient should be dynamically generated, but in this prototype it isn't -->
 				<ul class="patient-info">
-					<li>Vorname:</li>
-					<li>Nachname:</li>
-					<li>Geburtsdatum:</li>
-					<li>Geschlecht:</li>
+						<li>Vorname:       Sandra</li>
+						<li>Nachname:      Ackermann</li>
+						<li>Geburtsdatum:  30.03.1930</li>
+						<li>Geschlecht:    Weiblich</li>
 				</ul>
 
 
@@ -115,12 +115,12 @@
 	<!-- Custom JavaScript files -->
 	<script src="js/function.js"></script>
 
-	<div id="historyContent">
+	<div id="historyContent" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 	</div>
 
-	<h:outputText id="jsonHistoryData" style="color:white;font-size:1;" value="#{medicationHistoryView.firstExample}"></h:outputText>
-	<h:outputText id="jsonHistoryDates" style="color:white;font-size:1;" value="#{medicationHistoryView.guiDates}"></h:outputText>
+	<h:outputText id="jsonHistoryData" value="#{medicationHistoryView.firstExample}"></h:outputText>
+	<h:outputText id="jsonHistoryDates" value="#{medicationHistoryView.guiDates}"></h:outputText>
 
 	<script type="text/javascript">
 		window.onload = prepareHistory();

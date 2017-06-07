@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -41,7 +41,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-                <a class="navbar-brand" href="#">Elektek</a>
+                <a class="navbar-brand" href="#">AMP</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -81,12 +81,12 @@
             <div class="col-sm-3 col-md-2 sidebar">
 
 
-                <!-- Dynamicaly generated data about patient -->
+                <!-- Data about patient should be dynamically generated, but in this prototype it isn't -->
                 <ul class="patient-info">
-                    <li>Vorname:</li>
-                    <li>Nachname:</li>
-                    <li>Geburtsdatum: </li>
-                    <li>Geschlecht: </li>
+                    <li>Vorname:       Sandra</li>
+                    <li>Nachname:      Ackermann</li>
+                    <li>Geburtsdatum:  30.03.1930</li>
+                    <li>Geschlecht:    Weiblich</li>
                 </ul>
 
 
@@ -101,11 +101,10 @@
                 <h1 class="page-header">Medikation ändern</h1>
 
 
-                <h2 class="sub-header">Platzhalter Datum Medikationsplan</h2>
                 <form id="adjustMedicationForm" >
                 <div class="tableContainer">
 
-                    <div class="table-responsive yeOldeAdjustTable">
+                    <div class="table-responsive yeOldeAdjustTable tableFont">
                         <table id="myTable" class="table table-adjust-medication">
                             <thead>
                                 <tr>
@@ -189,13 +188,13 @@
 
 
                 </form>
-                
+
                 <div class="adjustButtons">
                     <button onclick="addRow(); addErasers()">Neues Medikament hinzufügen</button>
-                   <button class="saveChanges" onclick="extractJSONData()">Änderungen übernehmen</button> 
+                   <button class="saveChanges" onclick="extractJSONData()">Änderungen übernehmen</button>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </div>
@@ -206,37 +205,37 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-   
-   <!-- 
+
+   <!--
     <script type="text/javascript">
         window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
     </script>
  -->
-    
-    
+
+
     <script src="js/bootstrap.min.js"></script>
-    
-    
-    
+
+
+
 
     <!-- Custom JavaScript files -->
     <script src="js/function.js"></script>
-    
+
      <script src="js/jquery.redirect.js"></script>
-   
-   
+
+
 
     <script type="text/javascript">
-    
+
     function extractJSONData(){
-	    var medForm = JSON.stringify($(document.getElementById('adjustMedicationForm')).serializeArray()); 
+	    var medForm = JSON.stringify($(document.getElementById('adjustMedicationForm')).serializeArray());
 	    localStorage.setItem("medForm", medForm);
 	    console.log( medForm );
-	     
-	    
-	    
-	    $.redirect('home.xhtml', {'jsonstuff': medForm});
-	    //window.location = 'home.xhtml?jsonMedication=' + medForm;
+
+
+
+	    $.redirect('currentmedication.xhtml', {'jsonstuff': medForm});
+	    //window.location = 'currentmedication.xhtml?jsonMedication=' + medForm;
     }
     </script>
 

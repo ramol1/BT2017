@@ -25,6 +25,59 @@ function deleteEraser(r) {
 }
 
 
+// Login function while user are hardcoded
+var userWenger = "wenger";
+var passWenger = "admin";
+
+var userLoser = "loser";
+var passLoser = "admin";
+
+
+
+function check(form) {
+  if(form.userid.value == userWenger && form.userpass.value == passWenger) {
+    window.open('choosepatient.xhtml')
+    var name = "Wenger";
+  }
+  if(form.userid.value == userLoser && form.userpassw.value == passLoser) {
+    window.open('choosepatient.xhtml')
+    var name = "Loser";
+
+  }
+  else {
+    alert("Benutzername oder Passwort falsch")
+  }
+}
+
+// cookie to store user information
+var createCookie = function(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
 // Function to open and collapse tables
 /*
 $(document).ready(function() {
@@ -93,20 +146,20 @@ function prepareMedication(){
 function prepareHistory(){
 	var rawData = document.getElementById('jsonHistoryData').innerHTML;
 	var rawDates = document.getElementById('jsonHistoryDates').innerHTML;
-	
+
 	var dataArray = rawData.split("|");
 	var datesArray = rawDates.split("|");
-	
+
 	function createToggler( iterator ){
 		  return function(){
 			 $('#panel' + iterator).slideToggle('slow');
 		  }
 		}
-	
+
 	for (var iterator = 0; iterator < dataArray.length; iterator++) {
-	    
+
 		var guiString = '<div class="flip" id="flip' + iterator + '">' + datesArray[iterator]  + '</div><div class="panel" id="panel'+ iterator +'">'
-		 + '<div class="table-responsive">' 
+		 + '<div class="table-responsive tableFont">'
 	     + '<table class="table table-current-medication collapsed-table">'
 		 + '<thead><tr><th>Medikament</th><th>Wirkstoff</th><th>Code</th><th>Galenische Form</th>'
 		 + '<th>Dosis</th><th>Einheit</th><th>Schema</th><th>Einnahmemodus</th>'
@@ -116,10 +169,10 @@ function prepareHistory(){
 		 + '<tbody id="historyMedication' + iterator + '">'
 		 + '</tbody></table></div></div>'
 		 + '<div style="height:20px"></div>';
-		
+
 		var medContainer = document.getElementById('historyContent');
 		medContainer.insertAdjacentHTML('beforeend', guiString);
-		
+
 		console.log(guiString);
 		console.log(datesArray[iterator]);
 		console.log(dataArray[iterator]);
@@ -135,41 +188,41 @@ function prepareHistory(){
 		      tablearr += '</tr><tr>'
 		    }
 		}
-	
+
 		var selectorMed = '#historyMedication' + iterator;
 		console.log(selectorMed);
 		$(selectorMed).append(tablearr);
-		
+
 		/*
 		var selectorFlip = '#flip' + iterator;
 		console.log(selectorFlip);
 		var selectorPanel = '#panel' + iterator;
 		console.log(selectorPanel);
 		*/
-		
+
 		$('#flip' + iterator).click( createToggler( iterator ) );
-		
+
 		/*
 		$(selectorFlip+'').click(function() {
 	        $(selectorPanel+'').slideToggle('slow');
 	    });
-	    
+
 	    */
-		
+
 		/*
 		$(selectorFlip).click(function() {
 	        $(selectorPanel).slideToggle("slow");
 	    });
 	    */
-		
+
 	}
-	
-	
+
+
 }
 
 function prepareCurrentMedication(){
 	var rawCurrentMedData = document.getElementById('rawDataCurrentMedication').innerHTML;
-	
+
 	var currentMedicationJsonString = JSON.parse(rawCurrentMedData);
 	var tablearr ='<tr>';
 	for(var i = 0, len = currentMedicationJsonString.length; i < len; i++) {
@@ -181,13 +234,13 @@ function prepareCurrentMedication(){
 	      tablearr += '</tr><tr>'
 	    }
 	}
-	
+
 	$("#currentMedicationTable").append(tablearr);
 }
 
 function prepareHomeMedication(){
 	var rawCurrentMedData = document.getElementById('homeMedicationOutput').innerHTML;
-	
+
 	var currentMedicationJsonString = JSON.parse(rawCurrentMedData);
 	var tablearr ='<tr>';
 	for(var i = 0, len = currentMedicationJsonString.length; i < len; i++) {
@@ -199,7 +252,7 @@ function prepareHomeMedication(){
 	      tablearr += '</tr><tr>'
 	    }
 	}
-	
+
 	$("#homeMedicationTable").append(tablearr);
 }
 
